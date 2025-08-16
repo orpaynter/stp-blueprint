@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Competitive Advantages - OrPaynter</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      background-color: #f0f0f0;
+      font-family: 'Roboto', 'Noto Sans SC', sans-serif;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
+      color: #ccd6f6;
+      display: flex;
+      flex-direction: column;
+      padding: 50px 60px;
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide-header {
+      width: 100%;
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid rgba(100, 255, 218, 0.3);
+      animation: slideDown 0.8s ease-out forwards;
+    }
+
+    .slide-header h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin: 0;
+      color: #ffffff;
+      letter-spacing: 1px;
+    }
+
+    .slide-header h1::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background-color: #64ffda;
+      margin-top: 10px;
+    }
+    
+    .content-grid {
+        flex-grow: 1;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 30px;
+    }
+
+    .advantage-card {
+        background-color: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+        padding: 25px;
+        box-sizing: border-box;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        animation: fadeIn 0.6s ease-out forwards;
+        opacity: 0;
+    }
+
+    .advantage-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .advantage-card h3 {
+        font-size: 20px;
+        font-weight: 500;
+        color: #64ffda;
+        margin: 0 0 15px 0;
+    }
+
+    .advantage-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .advantage-card li {
+        font-size: 15px;
+        font-weight: 300;
+        line-height: 1.6;
+        color: #a8b2d1;
+        margin-bottom: 10px;
+        padding-left: 22px;
+        position: relative;
+    }
+
+    .advantage-card li::before {
+        content: '•';
+        position: absolute;
+        left: 0;
+        color: #64ffda;
+        font-size: 18px;
+        line-height: 1.5;
+    }
+
+    .advantage-card.barrier-card li::before {
+        content: '✓';
+        font-weight: 700;
+    }
+    
+    .ai-graphic-card {
+        background: none;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: fadeIn 0.6s ease-out forwards;
+        opacity: 0;
+        animation-delay: 1s;
+    }
+
+    .ai-graphic-card svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    .ai-graphic-card .node {
+        fill: #64ffda;
+        stroke: #0a192f;
+        stroke-width: 2;
+    }
+
+    .ai-graphic-card .link {
+        stroke: rgba(100, 255, 218, 0.3);
+        stroke-width: 1;
+        stroke-dasharray: 3;
+        animation: dash 5s linear infinite;
+    }
+
+    .footer {
+        position: absolute;
+        bottom: 20px;
+        right: 60px;
+        font-size: 20px;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.5);
+        animation: fadeIn 1s 1.2s ease-out forwards;
+        opacity: 0;
+    }
+
+    .footer span {
+      color: #64ffda;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes dash {
+        to {
+            stroke-dashoffset: -100;
+        }
+    }
+
+    .advantage-card:nth-child(1) { animation-delay: 0.2s; }
+    .advantage-card:nth-child(2) { animation-delay: 0.3s; }
+    .advantage-card:nth-child(3) { animation-delay: 0.4s; }
+    .advantage-card:nth-child(4) { animation-delay: 0.5s; }
+    .advantage-card:nth-child(5) { animation-delay: 0.6s; }
+
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <h1>Competitive Advantages</h1>
+    </div>
+
+    <div class="content-grid">
+      <div class="advantage-card">
+        <h3>AI-First Differentiation</h3>
+        <ul>
+          <li><strong>Proprietary damage detection models</strong> trained on roofing-specific datasets</li>
+          <li><strong>Vector database technology</strong> enables semantic similarity matching</li>
+          <li><strong>Real-time inference capabilities</strong> for instant assessments</li>
+          <li><strong>Continuous learning algorithms</strong> improve accuracy over time</li>
+        </ul>
+      </div>
+
+      <div class="advantage-card">
+        <h3>Multi-Stakeholder Marketplace</h3>
+        <ul>
+          <li><strong>First comprehensive platform</strong> connecting all industry participants</li>
+          <li><strong>Network effects</strong> create competitive moats as platform grows</li>
+          <li><strong>Data flywheel</strong> - more users generate better AI predictions</li>
+          <li><strong>Cross-stakeholder insights</strong> unavailable to single-segment solutions</li>
+        </ul>
+      </div>
+
+      <div class="advantage-card">
+        <h3>Technical Superiority</h3>
+        <ul>
+          <li><strong>Microservices architecture</strong> enables rapid feature development</li>
+          <li><strong>Modern tech stack</strong> attracts top engineering talent</li>
+          <li><strong>API-first design</strong> facilitates ecosystem integrations</li>
+          <li><strong>Scalable infrastructure</strong> supports exponential growth</li>
+        </ul>
+      </div>
+
+      <div class="advantage-card">
+        <h3>Market Position</h3>
+        <ul>
+            <li><strong>First-mover advantage</strong> in AI-powered roofing solutions</li>
+            <li><strong>Comprehensive feature set</strong> vs. point solutions</li>
+            <li><strong>Enterprise-grade security</strong> for insurance industry requirements</li>
+            <li><strong>Multi-database architecture</strong> handles complex data relationships</li>
+        </ul>
+      </div>
+      
+      <div class="advantage-card barrier-card">
+          <h3>Barrier Creation</h3>
+          <ul>
+              <li>Data network effects - platform improves with usage</li>
+              <li>Integration complexity - switching costs increase over time</li>
+              <li>Brand recognition - early market leadership</li>
+              <li>Technology patents - proprietary AI algorithms</li>
+          </ul>
+      </div>
+
+      <div class="ai-graphic-card">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+              <filter id="glow">
+                  <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+                  <feMerge>
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+              </filter>
+          </defs>
+          <g filter="url(#glow)">
+              <circle class="node" cx="50" cy="50" r="10" />
+              <circle class="node" cx="150" cy="50" r="10" />
+              <circle class="node" cx="50" cy="150" r="10" />
+              <circle class="node" cx="150" cy="150" r="10" />
+              <circle class="node" cx="100" cy="100" r="15" />
+              <circle class="node" cx="20" cy="100" r="8" />
+              <circle class="node" cx="180" cy="100" r="8" />
+              <circle class="node" cx="100" cy="20" r="8" />
+              <circle class="node" cx="100" cy="180" r="8" />
+              
+              <line class="link" x1="50" y1="50" x2="100" y2="100" />
+              <line class="link" x1="150" y1="50" x2="100" y2="100" />
+              <line class="link" x1="50" y1="150" x2="100" y2="100" />
+              <line class="link" x1="150" y1="150" x2="100" y2="100" />
+              <line class="link" x1="20" y1="100" x2="50" y2="50" />
+              <line class="link" x1="20" y1="100" x2="50" y2="150" />
+              <line class="link" x1="180" y1="100" x2="150" y2="50" />
+              <line class="link" x1="180" y1="100" x2="150" y2="150" />
+              <line class="link" x1="100" y1="20" x2="50" y2="50" />
+              <line class="link" x1="100" y1="20" x2="150" y2="50" />
+              <line class="link" x1="100" y1="180" x2="50" y2="150" />
+              <line class="link" x1="100" y1="180" x2="150" y2="150" />
+          </g>
+        </svg>
+      </div>
+
+    </div>
+    <div class="footer">Or<span>Paynter</span></div>
+  </div>
+</body>
+</html>

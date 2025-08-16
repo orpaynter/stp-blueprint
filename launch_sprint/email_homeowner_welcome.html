@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to OrPaynter</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; }
+        .container { max-width: 600px; margin: 0 auto; background-color: white; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px; text-align: center; }
+        .header h1 { color: white; margin: 0; font-size: 28px; }
+        .content { padding: 40px 30px; }
+        .step { background-color: #f8f9fa; padding: 20px; margin: 20px 0; border-radius: 8px; border-left: 4px solid #667eea; }
+        .cta-button { display: inline-block; background-color: #667eea; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
+        .footer { background-color: #2c3e50; color: white; padding: 20px; text-align: center; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏠 Welcome to OrPaynter Beta!</h1>
+            <p style="color: #e1e8ff; margin: 10px 0 0 0;">AI-Powered Roof Intelligence for Your Home</p>
+        </div>
+        
+        <div class="content">
+            <h2>Hi {{first_name}},</h2>
+            
+            <p>Welcome to the exclusive OrPaynter Beta! You're now part of a select group of homeowners pioneering the future of roof maintenance and insurance claims.</p>
+            
+            <div class="step">
+                <h3>🚀 Get Started in 3 Simple Steps</h3>
+                <ol>
+                    <li><strong>Complete Your Profile</strong> - Add your property details</li>
+                    <li><strong>Upload Roof Photos</strong> - Take photos with your phone</li>
+                    <li><strong>Get Instant AI Analysis</strong> - Receive detailed damage assessment</li>
+                </ol>
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="{{app_url}}/onboarding?token={{onboarding_token}}" class="cta-button">
+                    Start Your First Inspection →
+                </a>
+            </div>
+            
+            <h3>🎯 What You'll Get Access To:</h3>
+            <ul>
+                <li>✅ <strong>Free AI Roof Inspections</strong> - Up to 5 during beta</li>
+                <li>✅ <strong>Instant Damage Detection</strong> - 97% accuracy AI analysis</li>
+                <li>✅ <strong>Insurance-Ready Reports</strong> - Professional documentation</li>
+                <li>✅ <strong>Cost Estimates</strong> - Fair market pricing for repairs</li>
+                <li>✅ <strong>Weather Alerts</strong> - Proactive damage prevention</li>
+            </ul>
+            
+            <div class="step">
+                <h3>📞 Need Help?</h3>
+                <p>Our team is here to support you every step of the way:</p>
+                <ul>
+                    <li><strong>Email:</strong> beta@orpaynter.com</li>
+                    <li><strong>Phone:</strong> 469-479-2526</li>
+                    <li><strong>Beta Slack:</strong> <a href="{{slack_invite_url}}">Join our community</a></li>
+                </ul>
+            </div>
+            
+            <p><strong>Your feedback matters!</strong> As a beta user, your input directly shapes the future of OrPaynter. We'll be checking in regularly to hear about your experience.</p>
+            
+            <p>Thank you for being an early adopter and helping us revolutionize roof maintenance!</p>
+            
+            <p>Best regards,<br>
+            Oliver Paynter<br>
+            Founder, OrPaynter</p>
+        </div>
+        
+        <div class="footer">
+            <p>© 2025 OrPaynter | Oliver's Roofing & Contracting LLC</p>
+            <p>Dallas, TX | 469-479-2526 | oliver@orpaynter.com</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OrPaynter - Next Steps</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background: linear-gradient(135deg, #0D1B2A 0%, #000000 100%);
+      color: #E0E1DD;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .header {
+      padding: 40px 60px 20px 60px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .header h1 {
+      font-size: 52px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin: 0;
+      animation: slideInDown 0.8s ease-out;
+    }
+
+    .header h2 {
+      font-size: 22px;
+      font-weight: 400;
+      color: #4CC9F0;
+      margin: 5px 0 0 0;
+      animation: slideInDown 0.8s ease-out 0.2s;
+      animation-fill-mode: backwards;
+    }
+
+    .main-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto 1fr;
+      gap: 20px 30px;
+      padding: 25px 60px;
+      flex-grow: 1;
+    }
+
+    .content-block {
+      background-color: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      animation: popIn 1s ease-out;
+      animation-fill-mode: backwards;
+    }
+
+    .content-block h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #4CC9F0;
+      margin: 0 0 12px 0;
+      border-bottom: 1px solid rgba(76, 201, 240, 0.3);
+      padding-bottom: 8px;
+    }
+
+    .content-block ul {
+      margin: 0;
+      padding-left: 20px;
+      list-style-type: none;
+    }
+
+    .content-block ul li {
+      font-size: 14px;
+      color: #BFC8D5;
+      margin-bottom: 8px;
+      line-height: 1.5;
+      position: relative;
+    }
+    
+    .content-block ul li::before {
+      content: '•';
+      position: absolute;
+      left: -18px;
+      color: #4CC9F0;
+      font-weight: bold;
+    }
+
+    .content-block ul li strong {
+      color: #E0E1DD;
+      font-weight: 600;
+    }
+    
+    .materials-list li::before {
+        content: '✓';
+        font-family: sans-serif;
+        font-weight: bold;
+        color: #57F287;
+    }
+
+    .contact-block {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+    
+    .contact-item {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .contact-item svg {
+        width: 18px;
+        height: 18px;
+        margin-right: 12px;
+        fill: #4CC9F0;
+    }
+
+    .call-to-action-container {
+      grid-column: 1 / -1;
+      background: linear-gradient(90deg, #4361EE, #4CC9F0);
+      border-radius: 8px;
+      padding: 20px 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      animation: popIn 1s ease-out 1s;
+      animation-fill-mode: backwards;
+    }
+
+    .call-to-action-container p {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.6;
+      margin: 0 0 15px 0;
+      color: #FFFFFF;
+    }
+    
+    .call-to-action-container p strong {
+        font-weight: 700;
+    }
+
+    .final-cta {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0D1B2A;
+      background-color: #FFFFFF;
+      padding: 10px 20px;
+      border-radius: 50px;
+      display: inline-block;
+      margin: 0 auto;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .final-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+    
+    .logo-container {
+        position: absolute;
+        bottom: 25px;
+        right: 60px;
+        font-size: 24px;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.5);
+    }
+    .logo-container span {
+        color: #4CC9F0;
+        opacity: 0.8;
+    }
+
+    @keyframes slideInDown {
+      from { transform: translateY(-30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    
+    @keyframes popIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    
+    .content-block:nth-child(1) { animation-delay: 0.4s; }
+    .content-block:nth-child(2) { animation-delay: 0.5s; }
+    .content-block:nth-child(3) { animation-delay: 0.6s; }
+    .content-block:nth-child(4) { animation-delay: 0.7s; }
+    .contact-block { animation-delay: 0.8s; }
+
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="header">
+      <h1>Next Steps</h1>
+      <h2>Join Us in Transforming the Roofing Industry</h2>
+    </div>
+
+    <div class="main-content">
+      <div class="content-block">
+        <h3>Immediate Opportunities</h3>
+        <ul>
+          <li><strong>Series A Round:</strong> $3.5M at $15M pre-money valuation</li>
+          <li><strong>Lead Investor Position:</strong> Available for $1.5M+ commitment</li>
+          <li><strong>Strategic Investor Slots:</strong> Open for insurance carriers & construction co.</li>
+          <li><strong>Timeline:</strong> Term sheets by July 31, closing by Sept 30, 2025</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>What We're Offering Investors</h3>
+        <ul>
+          <li><strong>Direct access</strong> to founding team and board meetings</li>
+          <li><strong>Quarterly updates</strong> with detailed metrics and progress reports</li>
+          <li><strong>Customer introductions</strong> for business development</li>
+          <li><strong>Advisory role</strong> in strategic decisions and market expansion</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>Due Diligence Process</h3>
+        <ul>
+          <li><strong>Week 1:</strong> Data room access (financials, legal, tech specs)</li>
+          <li><strong>Week 2:</strong> Management presentations & customer calls</li>
+          <li><strong>Week 3:</strong> Technical deep-dive with CTO & platform demo</li>
+          <li><strong>Week 4:</strong> Term sheet negotiation & committee approval</li>
+        </ul>
+      </div>
+
+      <div class="content-block">
+        <h3>Investment Committee Materials</h3>
+        <ul class="materials-list">
+          <li><strong>Detailed financial model</strong> (5-year projections)</li>
+          <li><strong>Customer testimonials</strong> & case studies</li>
+          <li><strong>Technical documentation</strong> & AI model metrics</li>
+          <li><strong>Market research</strong> & competitive analysis</li>
+        </ul>
+      </div>
+
+      <div class="contact-block">
+        <div class="content-block" style="animation-delay: 0.8s;">
+          <h3>How to Get Involved</h3>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>
+            <span><strong>Email:</strong> investors@orpaynter.ai</span>
+          </div>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"></path></svg>
+            <span><strong>Phone:</strong> Schedule call via Calendly link</span>
+          </div>
+           <div class="contact-item">
+            <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-2.3a3.5 3.5 0 0 0-3.5-3.5c-1.93 0-3.5 1.57-3.5 3.5v2.3h7M12 10a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path></svg>
+            <span><strong>LinkedIn:</strong> Connect with founding team</span>
+          </div>
+        </div>
+        <div class="content-block" style="animation-delay: 0.9s;">
+          <h3>📅 Next Meetings</h3>
+           <div class="contact-item">
+             <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zM5 8V6h14v2H5z"></path></svg>
+             <span><strong>July 15:</strong> Investor webinar & product demo</span>
+           </div>
+           <div class="contact-item">
+             <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zM5 8V6h14v2H5z"></path></svg>
+             <span><strong>July 22:</strong> Technical deep-dive with CTO</span>
+           </div>
+           <div class="contact-item">
+             <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zM5 8V6h14v2H5z"></path></svg>
+             <span><strong>July 29:</strong> Customer panel with beta users</span>
+           </div>
+        </div>
+      </div>
+      
+    </div>
+    <div class="call-to-action-container">
+        <p><strong>OrPaynter is positioned to become the dominant AI platform in the $47B roofing industry.</strong> We're seeking strategic investors who share our vision of transforming this massive market through intelligent automation. <strong>Join us in building the future of roofing.</strong></p>
+        <div class="final-cta">Ready to invest? Let's schedule a follow-up meeting within 48 hours.</div>
+    </div>
+    <div class="logo-container">Or<span>Paynter</span></div>
+  </div>
+</body>
+</html>

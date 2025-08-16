@@ -1,0 +1,12 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: orpaynter-config
+  namespace: orpaynter
+data:
+  JWT_SECRET: "your-jwt-secret-here"
+  CORS_ORIGINS: "https://orpaynter.com,https://app.orpaynter.com"
+  RATE_LIMIT: "1000"
+  BATCH_SIZE: "32"
+---

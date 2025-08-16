@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OrPaynter Business Model</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@400;700&display=swap');
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f0f2f5;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background: radial-gradient(circle at top left, #1c2541, #0b132b);
+      color: #F0F4F8;
+      font-family: 'Lato', sans-serif;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    .slide::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background-image: linear-gradient(45deg, rgba(0, 168, 150, 0.05) 25%, transparent 25%),
+                          linear-gradient(-45deg, rgba(0, 168, 150, 0.05) 25%, transparent 25%),
+                          linear-gradient(45deg, transparent 75%, rgba(0, 168, 150, 0.05) 75%),
+                          linear-gradient(-45deg, transparent 75%, rgba(0, 168, 150, 0.05) 75%);
+        background-size: 30px 30px;
+        z-index: 0;
+        opacity: 0.5;
+    }
+
+    .header {
+      padding: 40px 60px 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo {
+      font-family: 'Poppins', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .logo span {
+      color: #00A896;
+    }
+
+    .title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 48px;
+      font-weight: 600;
+      color: #ffffff;
+      text-align: center;
+      margin: 0;
+      opacity: 0;
+      animation: fadeInDown 0.8s ease forwards;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      padding: 20px 60px 50px 60px;
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 40px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .pricing-section {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .section-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 24px;
+        font-weight: 600;
+        color: #00A896;
+        margin-bottom: 20px;
+        border-left: 4px solid #00A896;
+        padding-left: 15px;
+    }
+    
+    .pricing-tiers {
+        display: flex;
+        justify-content: space-between;
+        gap: 25px;
+        flex-grow: 1;
+    }
+
+    .pricing-card {
+      background-color: rgba(27, 38, 59, 0.8);
+      border: 1px solid #3A506B;
+      border-radius: 12px;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      flex: 1;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(5px);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .pricing-card:nth-child(1) { animation-delay: 0.2s; }
+    .pricing-card:nth-child(2) { animation-delay: 0.4s; }
+    .pricing-card:nth-child(3) { animation-delay: 0.6s; }
+    
+    .pricing-card:hover {
+        transform: translateY(20px) scale(1.03);
+        box-shadow: 0 15px 30px rgba(0, 168, 150, 0.2);
+    }
+    
+    .pro-tier {
+        border-color: #00A896;
+        box-shadow: 0 0 25px rgba(0, 168, 150, 0.3);
+    }
+
+    .card-header {
+      font-family: 'Poppins', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-family: 'Poppins', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: #00A896;
+      margin-bottom: 20px;
+    }
+    .price span {
+      font-size: 16px;
+      font-weight: 400;
+      color: #A9B4C2;
+    }
+
+    .features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+      font-size: 14px;
+      color: #CFD8DC;
+      flex-grow: 1;
+    }
+
+    .features li {
+      margin-bottom: 12px;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #00A896;
+      font-weight: bold;
+    }
+    
+    .right-column {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.6s ease forwards 0.8s;
+    }
+
+    .stakeholder-model, .value-creation {
+      background-color: rgba(27, 38, 59, 0.8);
+      border: 1px solid #3A506B;
+      border-radius: 12px;
+      padding: 25px;
+      backdrop-filter: blur(5px);
+    }
+
+    .stakeholder-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .stakeholder-list li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        font-size: 15px;
+    }
+    .stakeholder-list li:last-child {
+        margin-bottom: 0;
+    }
+    .stakeholder-icon {
+        width: 30px;
+        height: 30px;
+        margin-right: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(0, 168, 150, 0.2);
+        border-radius: 50%;
+        color: #00A896;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .stakeholder-name {
+        font-weight: 700;
+        color: #ffffff;
+        width: 100px;
+    }
+    .stakeholder-revenue {
+        color: #CFD8DC;
+    }
+    
+    .value-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .value-list li {
+        font-size: 16px;
+        padding-left: 30px;
+        margin-bottom: 15px;
+        position: relative;
+        color: #CFD8DC;
+    }
+    .value-list li:last-child {
+        margin-bottom: 0;
+    }
+    .value-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #00A896;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    
+    /* Animations */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="header">
+      <div class="logo">OrPaynter<span>.</span></div>
+      <h1 class="title">Business Model</h1>
+    </div>
+    <div class="main-content">
+      <div class="pricing-section">
+        <h2 class="section-title">SaaS Pricing Tiers</h2>
+        <div class="pricing-tiers">
+          <div class="pricing-card">
+            <div class="card-header">Starter</div>
+            <div class="price">$99<span>/month</span></div>
+            <ul class="features">
+              <li>Basic project management</li>
+              <li>Standard damage assessment</li>
+              <li>Limited marketplace access</li>
+            </ul>
+          </div>
+          <div class="pricing-card pro-tier">
+            <div class="card-header">Professional</div>
+            <div class="price">$299<span>/month</span></div>
+            <ul class="features">
+              <li>Advanced AI features</li>
+              <li>Priority contractor matching</li>
+              <li>Enhanced analytics dashboard</li>
+              <li>Insurance integration</li>
+            </ul>
+          </div>
+          <div class="pricing-card">
+            <div class="card-header">Enterprise</div>
+            <div class="price">$999<span>/month</span></div>
+            <ul class="features">
+              <li>Full platform access</li>
+              <li>Custom AI model training</li>
+              <li>White-label solutions</li>
+              <li>Dedicated support & API access</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="right-column">
+        <div class="stakeholder-model">
+          <h2 class="section-title">Multi-Stakeholder Revenue</h2>
+          <ul class="stakeholder-list">
+            <li>
+                <div class="stakeholder-icon">H</div>
+                <div class="stakeholder-name">Homeowners</div>
+                <div class="stakeholder-revenue">Subscription + transaction fees</div>
+            </li>
+            <li>
+                <div class="stakeholder-icon">C</div>
+                <div class="stakeholder-name">Contractors</div>
+                <div class="stakeholder-revenue">Platform fees + lead generation</div>
+            </li>
+            <li>
+                <div class="stakeholder-icon">I</div>
+                <div class="stakeholder-name">Insurance</div>
+                <div class="stakeholder-revenue">API access + claims processing fees</div>
+            </li>
+             <li>
+                <div class="stakeholder-icon">S</div>
+                <div class="stakeholder-name">Suppliers</div>
+                <div class="stakeholder-revenue">Marketplace commission + advertising</div>
+            </li>
+          </ul>
+        </div>
+        <div class="value-creation">
+          <h2 class="section-title">Value Creation</h2>
+          <ul class="value-list">
+            <li>Network effects increase platform value for all stakeholders.</li>
+            <li>Multiple revenue streams from diverse stakeholders reduce risk.</li>
+            <li>Recurring SaaS model ensures predictable and scalable income.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

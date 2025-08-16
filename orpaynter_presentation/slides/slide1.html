@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OrPaynter AI Platform - Strategic Analysis & Recommendations</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f2f5;
+      font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background-color: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 0 100px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 80%;
+      height: 200%;
+      background: linear-gradient(135deg, rgba(30, 64, 175, 0.05), rgba(30, 64, 175, 0));
+      transform: rotate(25deg);
+      z-index: 1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .accent-line {
+      width: 120px;
+      height: 6px;
+      background-color: #1E40AF;
+      margin-bottom: 30px;
+      border-radius: 3px;
+      animation: slideIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    h1 {
+      font-size: 72px;
+      font-weight: 700;
+      color: #1E40AF;
+      margin: 0 0 10px 0;
+      line-height: 1.1;
+      letter-spacing: -1px;
+    }
+
+    h2 {
+      font-size: 36px;
+      font-weight: 300;
+      color: #374151;
+      margin: 0;
+      padding-left: 2px;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 60px;
+      left: 100px;
+      right: 100px;
+      display: flex;
+      justify-content: space-between;
+      z-index: 2;
+      font-size: 18px;
+      color: #6B7280;
+      font-weight: 400;
+      animation: fadeIn 1s ease-out 0.5s;
+      animation-fill-mode: backwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        width: 0;
+      }
+      to {
+        width: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="content">
+      <div class="accent-line"></div>
+      <h1>OrPaynter AI Platform</h1>
+      <h2>Strategic Analysis & Recommendations</h2>
+    </div>
+    <div class="footer">
+      <span>MiniMax Agent</span>
+      <span>June 2025</span>
+    </div>
+  </div>
+</body>
+</html>

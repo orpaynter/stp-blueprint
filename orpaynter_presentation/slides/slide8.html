@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Market Opportunity - AI in Roofing</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f0f0f0;
+      font-family: 'Poppins', sans-serif, 'PingFang SC', 'Microsoft YaHei';
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background: radial-gradient(circle, #1e2a47 0%, #101827 100%);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .slide-header {
+      padding: 40px 60px 20px 60px;
+      border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+    }
+
+    .slide-header h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin: 0;
+      color: #ffffff;
+      text-align: left;
+      animation: slideInDown 0.8s ease-out;
+    }
+
+    .slide-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding: 30px 60px;
+      flex-grow: 1;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .section {
+      animation: slideInUp 1s ease-out;
+    }
+    
+    .section:nth-child(1) { animation-delay: 0.2s; }
+    .section:nth-child(2) { animation-delay: 0.4s; }
+    .column:nth-child(2) .section:nth-child(1) { animation-delay: 0.3s; }
+    .column:nth-child(2) .section:nth-child(2) { animation-delay: 0.5s; }
+    .column:nth-child(2) .section:nth-child(3) { animation-delay: 0.7s; }
+
+
+    .section h2 {
+      font-size: 22px;
+      font-weight: 600;
+      color: #64ffda;
+      margin-bottom: 15px;
+      padding-bottom: 5px;
+      border-bottom: 2px solid #64ffda;
+      display: inline-block;
+    }
+
+    .section ul {
+      list-style: none;
+      padding-left: 20px;
+      margin: 0;
+    }
+
+    .section ul li {
+      font-size: 16px;
+      font-weight: 300;
+      color: #c5d1e8;
+      margin-bottom: 12px;
+      line-height: 1.5;
+      position: relative;
+    }
+
+    .section ul li::before {
+      content: '•';
+      color: #64ffda;
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1.2em;
+      position: absolute;
+      top: 1px;
+    }
+
+    .section ul li strong {
+      font-weight: 600;
+      color: #e0e8ff;
+    }
+    
+    .growth-catalysts li::before {
+      content: '✓';
+    }
+
+    .market-size-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      height: 280px;
+      margin-top: 10px;
+    }
+
+    .market-circle {
+      border-radius: 50%;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: transform 0.3s ease-out;
+    }
+    
+    .market-circle:hover {
+        transform: scale(1.05);
+    }
+
+    .tam {
+      width: 260px;
+      height: 260px;
+      background: rgba(100, 255, 218, 0.1);
+      border: 2px solid rgba(100, 255, 218, 0.4);
+      animation: scaleUp 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) 0.5s backwards;
+    }
+
+    .sam {
+      width: 180px;
+      height: 180px;
+      background: rgba(100, 255, 218, 0.2);
+      border: 2px solid rgba(100, 255, 218, 0.6);
+      animation: scaleUp 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) 0.7s backwards;
+    }
+
+    .som {
+      width: 100px;
+      height: 100px;
+      background: rgba(100, 255, 218, 0.8);
+      border: 2px solid #64ffda;
+      animation: scaleUp 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) 0.9s backwards;
+    }
+
+    .market-circle .label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffffff;
+      opacity: 0.8;
+    }
+    
+    .som .label {
+        color: #101827;
+    }
+
+    .market-circle .value {
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    
+    .som .value {
+        color: #101827;
+        font-size: 20px;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      right: 60px;
+      font-size: 20px;
+      font-weight: 600;
+      color: #64ffda;
+      opacity: 0.8;
+    }
+    
+    .footer span {
+        font-weight: 300;
+        color: #c5d1e8;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes slideInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes scaleUp {
+        from {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    /* Background Image Placeholder using CSS */
+    .slide::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url('https://images.unsplash.com/photo-1574793424220-91a326b44126?q=80&w=1280&auto=format&fit=crop');
+        background-size: cover;
+        background-position: center;
+        opacity: 0.1;
+        z-index: -1;
+    }
+    
+    .slide-content-wrapper {
+        flex-grow: 1;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .background-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle, rgba(30, 42, 71, 0.8) 0%, rgba(16, 24, 39, 0.95) 100%);
+        z-index: 0;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="background-overlay"></div>
+    <div class="slide-content-wrapper">
+        <div class="slide-header">
+            <h1>Market Opportunity</h1>
+        </div>
+        <div class="slide-content">
+            <div class="column">
+                <div class="section">
+                    <h2>Industry Overview</h2>
+                    <ul>
+                        <li><strong>$47B US Roofing Market</strong> growing 6.1% annually</li>
+                        <li><strong>Fragmented landscape</strong> with 100,000+ contractors</li>
+                        <li><strong>Manual processes</strong> dominate traditional workflows</li>
+                        <li><strong>Limited technology adoption</strong> creates disruption opportunity</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h2>Market Disruption Drivers</h2>
+                    <ul>
+                        <li>Insurance claims increasingly require digital validation</li>
+                        <li>Homeowners demand transparent pricing and quality assurance</li>
+                        <li>Contractors need efficiency tools to remain competitive</li>
+                        <li>Suppliers seek direct marketplace access</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="section">
+                    <h2>Addressable Markets</h2>
+                    <div class="market-size-container">
+                        <div class="market-circle tam">
+                            <span class="label">TAM</span>
+                            <span class="value">$47B</span>
+                        </div>
+                        <div class="market-circle sam">
+                            <span class="label">SAM</span>
+                            <span class="value">$12B</span>
+                        </div>
+                        <div class="market-circle som">
+                            <span class="label">SOM</span>
+                            <span class="value">$1.2B</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <h2>AI-Powered Transformation</h2>
+                    <ul>
+                        <li><strong>Automated damage detection</strong> reduces assessment time by 80%</li>
+                        <li><strong>Predictive cost modeling</strong> improves project accuracy</li>
+                        <li><strong>Intelligent matching</strong> optimizes contractor-homeowner fit</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h2>Growth Catalysts</h2>
+                    <ul class="growth-catalysts">
+                        <li>Climate change increases storm damage frequency</li>
+                        <li>Digital transformation accelerating across construction</li>
+                        <li>Insurance industry embracing AI validation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer"><span>Or</span>Paynter</div>
+    </div>
+  </div>
+</body>
+</html>

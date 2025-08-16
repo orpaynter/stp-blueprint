@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OrPaynter Investment Highlights</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background: radial-gradient(circle, #1e2a47 0%, #0a192f 100%);
+      color: #a8b2d1;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      padding: 40px 60px;
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .header {
+      text-align: left;
+      border-bottom: 1px solid #303C55;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      font-size: 48px;
+      color: #64ffda;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .header h2 {
+      font-size: 22px;
+      color: #ccd6f6;
+      margin: 5px 0 0 0;
+      font-weight: 400;
+    }
+
+    .main-content {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, auto);
+      gap: 25px 35px;
+      flex-grow: 1;
+    }
+
+    .highlight-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .highlight-item h3 {
+      font-size: 18px;
+      color: #ccd6f6;
+      margin: 0 0 10px 0;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+    
+    .highlight-item h3 span {
+        margin-right: 8px;
+        font-size: 22px;
+    }
+
+    .highlight-item ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .highlight-item li {
+      margin-bottom: 6px;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .highlight-item li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #64ffda;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    
+    .highlight-item li strong {
+        color: #e6f1ff;
+        font-weight: 600;
+    }
+
+    .bottom-section {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 35px;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid #303C55;
+    }
+    
+    .risk-mitigation h4, .investment-thesis h4 {
+        font-size: 16px;
+        color: #64ffda;
+        margin: 0 0 10px 0;
+        font-weight: 600;
+    }
+
+    .risk-mitigation ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+    }
+    
+    .risk-mitigation li {
+        margin-bottom: 4px;
+        color: #a8b2d1;
+    }
+
+    .risk-mitigation li span {
+        color: #64ffda;
+        margin-right: 8px;
+        font-weight: bold;
+    }
+
+    .investment-thesis p {
+        font-size: 15px;
+        line-height: 1.6;
+        margin: 0;
+        color: #ccd6f6;
+        font-style: italic;
+    }
+    
+    .investment-thesis strong {
+        color: #e6f1ff;
+        font-style: normal;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      right: 60px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #64ffda;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="header">
+      <h1>Investment Highlights</h1>
+      <h2>Why OrPaynter is a Compelling Investment</h2>
+    </div>
+
+    <div class="main-content">
+      <div class="highlight-item">
+        <h3><span>🚀</span>Massive Market Opportunity</h3>
+        <ul>
+          <li><strong>$47B roofing industry</strong> with 85% manual processes</li>
+          <li><strong>6.1% annual growth</strong> driven by climate & infrastructure</li>
+          <li><strong>Early stage disruption</strong> with first-mover AI advantage</li>
+        </ul>
+      </div>
+      <div class="highlight-item">
+        <h3><span>🎯</span>Proven Product-Market Fit</h3>
+        <ul>
+          <li><strong>100% platform validation</strong> with live deployment</li>
+          <li><strong>250+ beta customers</strong> with 4.8/5 satisfaction</li>
+          <li><strong>$2.3M damage detected</strong> by AI, proving value</li>
+          <li><strong>97% AI accuracy</strong> exceeds industry standards</li>
+        </ul>
+      </div>
+      <div class="highlight-item">
+        <h3><span>⚡</span>Defensible Technology</h3>
+        <ul>
+          <li><strong>Proprietary AI models</strong> on 500K+ specific images</li>
+          <li><strong>Advanced vector DB architecture</strong> for real-time processing</li>
+          <li><strong>Network effects</strong> create scaling competitive moats</li>
+          <li><strong>Patent-pending algorithms</strong> for detection & estimation</li>
+        </ul>
+      </div>
+      <div class="highlight-item">
+        <h3><span>💰</span>Strong Unit Economics</h3>
+        <ul>
+          <li><strong>$8,400 Customer LTV</strong> with 56:1 LTV/CAC ratio</li>
+          <li><strong>87% gross margins</strong> with recurring SaaS revenue</li>
+          <li><strong>&lt;5% monthly churn</strong> indicates strong product stickiness</li>
+          <li><strong>125% net revenue retention</strong> from expansion</li>
+        </ul>
+      </div>
+      <div class="highlight-item">
+        <h3><span>📈</span>Clear Path to Scale</h3>
+        <ul>
+          <li><strong>Experienced team</strong> in AI, construction, and scaling</li>
+          <li><strong>Strategic partnerships</strong> with major insurance carriers</li>
+          <li><strong>Multi-channel GTM</strong> (direct, digital, partnerships)</li>
+          <li><strong>18-month path to profitability</strong> with current funding</li>
+        </ul>
+      </div>
+      <div class="highlight-item">
+        <h3><span>🎯</span>Multiple Exit Opportunities</h3>
+        <ul>
+          <li><strong>Strategic acquisition</strong> by insurance carriers</li>
+          <li><strong>Construction tech consolidation</strong> (Autodesk, Procore)</li>
+          <li><strong>Private equity rollup</strong> of industry tech solutions</li>
+          <li><strong>IPO potential</strong> at $100M+ revenue (SaaS model)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom-section">
+      <div class="risk-mitigation">
+        <h4>Risk Mitigation Factors</h4>
+        <ul>
+          <li><span>✓</span>Multiple revenue streams reduce failure risk</li>
+          <li><span>✓</span>Diverse customer base (contractors, homeowners)</li>
+          <li><span>✓</span>Proven technology with live validation</li>
+          <li><span>✓</span>Large market with multiple expansion vectors</li>
+        </ul>
+      </div>
+      <div class="investment-thesis">
+        <h4>Investment Thesis</h4>
+        <p>OrPaynter represents a rare opportunity to invest in an <strong>AI-first platform</strong> disrupting a massive, underserved market with a <strong>proven team, technology, and traction.</strong></p>
+      </div>
+    </div>
+    
+    <div class="footer">OrPaynter</div>
+  </div>
+</body>
+</html>

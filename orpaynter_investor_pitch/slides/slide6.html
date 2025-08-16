@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technology Stack - OrPaynter</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Poppins', 'Helvetica Neue', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', 'Microsoft Yahei', sans-serif;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background-color: #0d1117;
+      color: #c9d1d9;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+      background-image:
+        radial-gradient(circle at 10% 15%, rgba(56, 139, 253, 0.15), transparent 40%),
+        radial-gradient(circle at 90% 85%, rgba(31, 111, 235, 0.1), transparent 40%);
+      border: 1px solid #30363d;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .slide-header {
+      padding: 40px 60px 20px;
+      border-bottom: 1px solid #30363d;
+      animation: fadeIn 0.5s ease-out forwards;
+      position: relative;
+    }
+    
+    .logo {
+        position: absolute;
+        top: 40px;
+        right: 60px;
+        font-size: 24px;
+        font-weight: 700;
+        color: #c9d1d9;
+    }
+    .logo span {
+        color: #58a6ff;
+    }
+
+    .slide-header h1 {
+      font-size: 48px;
+      font-weight: 700;
+      color: #f0f6fc;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .slide-header p {
+      font-size: 22px;
+      font-weight: 300;
+      color: #8b949e;
+      margin: 5px 0 0;
+    }
+
+    .slide-content {
+      flex-grow: 1;
+      display: grid;
+      grid-template-columns: 2fr 1.5fr;
+      gap: 40px;
+      padding: 30px 60px 40px;
+      overflow: hidden;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .column-left {
+        animation: fadeIn 0.7s ease-out 0.2s forwards;
+        opacity: 0;
+    }
+    
+    .column-right {
+        animation: fadeIn 0.7s ease-out 0.4s forwards;
+        opacity: 0;
+    }
+
+    .section {
+      background: rgba(48, 54, 61, 0.3);
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .section h2 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #58a6ff;
+      margin: 0 0 15px 0;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #30363d;
+    }
+
+    .section h3 {
+        font-size: 18px;
+        font-weight: 600;
+        color: #c9d1d9;
+        margin: 10px 0 8px 0;
+    }
+
+    .section ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+
+    .section li {
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .section li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #58a6ff;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 1;
+    }
+    
+    .section li strong {
+        color: #f0f6fc;
+        font-weight: 600;
+    }
+
+    .section li span {
+        color: #8b949e;
+    }
+    
+    .accuracy-highlight {
+        color: #3fb950 !important;
+        font-weight: 600;
+    }
+
+    .service-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .service-box {
+        background-color: #21262d;
+        border: 1px solid #30363d;
+        color: #c9d1d9;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 13px;
+    }
+
+    .db-container {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .db-item {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+    }
+
+    .db-tag {
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 12px;
+        margin-right: 10px;
+        min-width: 80px;
+        text-align: center;
+    }
+
+    .db-postgres { background-color: #336791; color: white; }
+    .db-mongo { background-color: #47A248; color: white; }
+    .db-redis { background-color: #DC382D; color: white; }
+    .db-qdrant { background-color: #E65A4D; color: white; }
+
+    .advantages-section {
+        background: linear-gradient(135deg, rgba(88, 166, 255, 0.05), rgba(88, 166, 255, 0.15));
+        border: 1px solid #58a6ff;
+    }
+
+    .advantages-section ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 100%;
+    }
+    
+    .advantages-section li {
+        font-size: 17px;
+        padding-left: 30px;
+        line-height: 1.5;
+        margin-bottom: 0;
+    }
+
+    .advantages-section li::before {
+        content: '✓';
+        color: #3fb950;
+        font-size: 24px;
+        font-weight: bold;
+        left: 0;
+        top: 0;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="logo">OrPaynter<span>.</span></div>
+    <header class="slide-header">
+      <h1>Technology Stack</h1>
+      <p>Advanced AI Infrastructure Built for Scale</p>
+    </header>
+    <main class="slide-content">
+      <div class="column column-left">
+        <div class="section">
+            <h2>AI/ML Excellence</h2>
+            <div>
+                <h3>Computer Vision Models</h3>
+                <ul>
+                    <li><span>Frameworks:</span> <strong>TensorFlow & PyTorch</strong></li>
+                    <li><span>Architecture:</span> Custom CNNs trained on <strong>500K+</strong> roof images</li>
+                    <li><span>Processing:</span> <strong>OpenCV</strong> for real-time analysis</li>
+                    <li><span>Performance:</span> <strong class="accuracy-highlight">97% accuracy</strong> in damage detection (vs 60% industry avg)</li>
+                </ul>
+            </div>
+             <div>
+                <h3>Vector Database Technology</h3>
+                <ul>
+                    <li><span>Core Tech:</span> <strong>Qdrant</strong> for semantic similarity search</li>
+                    <li><span>Speed:</span> <strong>Sub-second</strong> query response times</li>
+                    <li><span>Application:</span> Intelligent contractor-project matching</li>
+                </ul>
+            </div>
+             <div>
+                <h3>Machine Learning Pipeline</h3>
+                <ul>
+                    <li><span>Automation:</span> Automated model training & deployment (CI/CD for ML)</li>
+                    <li><span>Evolution:</span> Continuous learning from user feedback</li>
+                    <li><span>Delivery:</span> Real-time inference for instant results</li>
+                </ul>
+            </div>
+        </div>
+      </div>
+      <div class="column column-right">
+        <div class="section">
+          <h2>Modern Architecture</h2>
+          <div>
+            <h3>Microservices Design</h3>
+            <div class="service-container">
+                <div class="service-box">API Gateway</div>
+                <div class="service-box">User Service</div>
+                <div class="service-box">AI Service</div>
+                <div class="service-box">Project Service</div>
+                <div class="service-box">Payment Service</div>
+                <div class="service-box">...and more</div>
+            </div>
+            <ul>
+                <li><strong>Docker</strong> containerization for consistency & scalability</li>
+                <li>Independent service scaling and deployment</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Multi-Database Strategy</h3>
+            <div class="db-container">
+                <div class="db-item"><span class="db-tag db-postgres">PostgreSQL</span> Relational data & transactions</div>
+                <div class="db-item"><span class="db-tag db-mongo">MongoDB</span> Unstructured data & documents</div>
+                <div class="db-item"><span class="db-tag db-redis">Redis</span> Caching & real-time performance</div>
+                <div class="db-item"><span class="db-tag db-qdrant">Qdrant</span> AI-powered semantic search</div>
+            </div>
+          </div>
+        </div>
+        <div class="section advantages-section">
+          <h2>Competitive Advantages</h2>
+          <ul>
+            <li><strong>Proprietary AI models</strong> trained on roofing-specific datasets</li>
+            <li><strong>Real-time processing</strong> with sub-30 second response times</li>
+            <li><strong>Scalable infrastructure</strong> supporting 10K+ concurrent users</li>
+            <li><strong>API-first design</strong> enabling ecosystem integrations</li>
+            <li><strong>Enterprise security</strong> meeting insurance industry requirements</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

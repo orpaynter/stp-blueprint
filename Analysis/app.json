@@ -1,0 +1,82 @@
+{
+  "react-native": {
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.oliversroofingandcontracting.orpaynter",
+      "buildNumber": "1",
+      "infoPlist": {
+        "UIBackgroundModes": ["fetch", "remote-notification"],
+        "NSCameraUsageDescription": "OrPaynter needs access to your camera to capture roof damage for assessment.",
+        "NSPhotoLibraryUsageDescription": "OrPaynter needs access to your photo library to upload existing roof images for assessment.",
+        "NSLocationWhenInUseUsageDescription": "OrPaynter needs access to your location to provide accurate weather forecasts for your projects.",
+        "NSMicrophoneUsageDescription": "OrPaynter needs access to your microphone to record voice notes for project documentation."
+      },
+      "appStoreUrl": "https://apps.apple.com/app/orpaynter/id1234567890",
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "com.oliversroofingandcontracting.orpaynter",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#1E40AF"
+      },
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "RECORD_AUDIO",
+        "VIBRATE",
+        "RECEIVE_BOOT_COMPLETED",
+        "ACCESS_NETWORK_STATE"
+      ],
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.oliversroofingandcontracting.orpaynter",
+      "googleServicesFile": "./google-services.json"
+    },
+    "name": "OrPaynter",
+    "slug": "orpaynter",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1E40AF"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "OrPaynter needs access to your photos to upload existing roof images for assessment.",
+          "cameraPermission": "OrPaynter needs access to your camera to capture roof damage for assessment."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "OrPaynter needs access to your location to provide accurate weather forecasts for your projects."
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "OrPaynter needs access to your media library to save assessment photos.",
+          "savePhotosPermission": "OrPaynter needs access to save photos to your media library."
+        }
+      ]
+    ]
+  }
+}

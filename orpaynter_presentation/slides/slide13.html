@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Risk Assessment - OrPaynter</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    :root {
+      --font-family: 'Poppins', 'Helvetica Neue', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+      --bg-color: #f8f9fa;
+      --slide-bg: #ffffff;
+      --title-color: #0a2540;
+      --text-color: #425466;
+      --accent-color: #007bff;
+      --risk-high: #dc3545;
+      --risk-medium: #ffc107;
+      --risk-low: #28a745;
+      --risk-high-bg: #f8d7da;
+      --risk-medium-bg: #fff3cd;
+      --risk-low-bg: #d4edda;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      background-color: var(--bg-color);
+      font-family: var(--font-family);
+      overflow: hidden;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background-color: var(--slide-bg);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      padding: 40px 60px;
+      box-sizing: border-box;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .header {
+      width: 100%;
+      text-align: left;
+      border-bottom: 2px solid #e9ecef;
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+    }
+
+    .header h1 {
+      font-size: 48px;
+      color: var(--title-color);
+      margin: 0;
+      font-weight: 700;
+    }
+    
+    .header .brand {
+        font-size: 16px;
+        color: var(--accent-color);
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    .content-area {
+      display: flex;
+      flex: 1;
+      gap: 40px;
+      overflow: hidden;
+    }
+
+    .risks-column {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sidebar-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .risk-category {
+        animation: slideUp 0.7s ease-out forwards;
+        opacity: 0;
+    }
+
+    .risk-category:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    @keyframes slideUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    .risk-category h2 {
+      font-size: 24px;
+      color: var(--title-color);
+      margin: 0 0 15px 0;
+      font-weight: 600;
+    }
+
+    .risk-item {
+      background-color: #fdfdff;
+      border-left: 5px solid;
+      padding: 10px 15px;
+      margin-bottom: 12px;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .risk-item.high { border-color: var(--risk-high); }
+    .risk-item.medium { border-color: var(--risk-medium); }
+    .risk-item.low { border-color: var(--risk-low); }
+
+    .risk-item h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--title-color);
+      margin: 0 0 8px 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .risk-level {
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      margin-right: 10px;
+      text-transform: uppercase;
+    }
+
+    .risk-level.high { background-color: var(--risk-high); }
+    .risk-level.medium { background-color: var(--risk-medium); }
+    .risk-level.low { background-color: var(--risk-low); }
+
+    .risk-details p {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text-color);
+      margin: 2px 0;
+    }
+
+    .risk-details strong {
+      color: var(--title-color);
+      font-weight: 600;
+    }
+    
+    .risk-details .mitigation {
+      color: var(--accent-color);
+      font-weight: 600;
+    }
+
+    .visualization-box {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 20px;
+      animation: slideUp 0.7s ease-out 0.4s forwards;
+      opacity: 0;
+    }
+
+    .visualization-box h3 {
+      text-align: center;
+      font-size: 18px;
+      color: var(--title-color);
+      margin: 0 0 15px 0;
+    }
+
+    .risk-matrix-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .y-axis-label {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      margin-right: 10px;
+      font-weight: 600;
+      color: var(--text-color);
+      font-size: 14px;
+    }
+    
+    .matrix-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .risk-matrix {
+      display: grid;
+      grid-template-columns: repeat(3, 75px);
+      grid-template-rows: repeat(3, 75px);
+      border: 1px solid #ccc;
+    }
+
+    .matrix-cell {
+      border: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-color);
+      padding: 4px;
+      position: relative;
+    }
+    
+    .matrix-cell span {
+        background: rgba(255,255,255,0.8);
+        padding: 2px 4px;
+        border-radius: 3px;
+    }
+
+    .matrix-cell.high-risk { background-color: var(--risk-high-bg); }
+    .matrix-cell.medium-risk { background-color: var(--risk-medium-bg); }
+    .matrix-cell.low-risk { background-color: var(--risk-low-bg); }
+    
+    .x-axis-label {
+        margin-top: 10px;
+        font-weight: 600;
+        color: var(--text-color);
+        font-size: 14px;
+    }
+
+    .timeline {
+      padding-top: 20px;
+      border-top: 1px solid #e9ecef;
+      animation: slideUp 0.7s ease-out 0.6s forwards;
+      opacity: 0;
+    }
+    
+    .timeline h3 {
+        font-size: 18px;
+        color: var(--title-color);
+        margin: 0 0 15px 0;
+        text-align: center;
+    }
+
+    .timeline-steps {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    
+    .timeline-step {
+        flex: 1;
+        text-align: center;
+        padding: 10px;
+        border-radius: 6px;
+        background-color: #f8f9fa;
+    }
+    
+    .timeline-step strong {
+        display: block;
+        font-size: 14px;
+        color: var(--accent-color);
+        margin-bottom: 5px;
+    }
+    
+    .timeline-step p {
+        font-size: 12px;
+        color: var(--text-color);
+        margin: 0;
+        line-height: 1.4;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="header">
+      <span class="brand">ORPAYNTER // PROACTIVE PLANNING</span>
+      <h1>Risk Assessment</h1>
+    </div>
+
+    <div class="content-area">
+      <div class="risks-column">
+        <div class="risk-category">
+          <h2>Technical Risks</h2>
+          <div class="risk-item high">
+            <h3><span class="risk-level high">HIGH</span> Integration Complexity</h3>
+            <div class="risk-details">
+              <p><strong>Challenge:</strong> Multiple services, databases, and components need seamless integration.</p>
+              <p><strong>Impact:</strong> Delays in launch, potential system instability.</p>
+              <p><strong class="mitigation">Mitigation:</strong> Phased integration, comprehensive testing, dedicated DevOps.</p>
+            </div>
+          </div>
+          <div class="risk-item medium">
+            <h3><span class="risk-level medium">MEDIUM</span> Scalability Under Load</h3>
+            <div class="risk-details">
+              <p><strong>Challenge:</strong> Platform performance with rapid user growth.</p>
+              <p><strong>Impact:</strong> Poor user experience, system outages.</p>
+              <p><strong class="mitigation">Mitigation:</strong> Load testing, auto-scaling infrastructure, performance monitoring.</p>
+            </div>
+          </div>
+          <div class="risk-item medium">
+            <h3><span class="risk-level medium">MEDIUM</span> AI Model Accuracy</h3>
+            <div class="risk-details">
+              <p><strong>Challenge:</strong> Damage detection models may have false positives/negatives.</p>
+              <p><strong>Impact:</strong> User trust issues, insurance claim disputes.</p>
+              <p><strong class="mitigation">Mitigation:</strong> Continuous training, human validation, confidence scoring.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="risk-category">
+          <h2>Business Risks</h2>
+          <div class="risk-item high">
+            <h3><span class="risk-level high">HIGH</span> Market Adoption Speed</h3>
+            <div class="risk-details">
+              <p><strong>Challenge:</strong> Traditional industry slow to adopt new technology.</p>
+              <p><strong>Impact:</strong> Extended runway to profitability.</p>
+              <p><strong class="mitigation">Mitigation:</strong> Strategic partnerships, pilot programs, gradual rollout.</p>
+            </div>
+          </div>
+          <div class="risk-item medium">
+            <h3><span class="risk-level medium">MEDIUM</span> Competitive Response</h3>
+            <div class="risk-details">
+              <p><strong>Challenge:</strong> Large players may develop competing solutions.</p>
+              <p><strong>Impact:</strong> Market share erosion, pricing pressure.</p>
+              <p><strong class="mitigation">Mitigation:</strong> First-mover advantage, continuous innovation, patent protection.</p>
+            </div>
+          </div>
+          <div class="risk-item low">
+            <h3><span class="risk-level low">LOW</span> Regulatory Changes</h3>
+            <div class="risk-details">
+              <p><strong>Challenge:</strong> Insurance or construction industry regulations.</p>
+              <p><strong>Impact:</strong> Compliance costs, feature modifications.</p>
+              <p><strong class="mitigation">Mitigation:</strong> Regulatory monitoring, flexible architecture, industry partnerships.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-column">
+        <div class="visualization-box">
+          <h3>Risk Matrix</h3>
+          <div class="risk-matrix-container">
+            <div class="y-axis-label">Likelihood</div>
+            <div class="matrix-content">
+              <div class="risk-matrix">
+                <!-- Row 1: High Likelihood -->
+                <div class="matrix-cell medium-risk"></div>
+                <div class="matrix-cell high-risk"></div>
+                <div class="matrix-cell high-risk"><span>Integration<br/>Adoption</span></div>
+                <!-- Row 2: Medium Likelihood -->
+                <div class="matrix-cell low-risk"></div>
+                <div class="matrix-cell medium-risk"><span>Scalability<br/>AI Accuracy<br/>Competition</span></div>
+                <div class="matrix-cell high-risk"></div>
+                <!-- Row 3: Low Likelihood -->
+                <div class="matrix-cell low-risk"><span>Regulatory</span></div>
+                <div class="matrix-cell low-risk"></div>
+                <div class="matrix-cell medium-risk"></div>
+              </div>
+               <div class="x-axis-label">Impact</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="timeline">
+            <h3>Mitigation Timeline</h3>
+            <div class="timeline-steps">
+                <div class="timeline-step">
+                    <strong>Immediate (0-3m)</strong>
+                    <p>Technical Integration & Security Audit</p>
+                </div>
+                <div class="timeline-step">
+                    <strong>Short-Term (3-6m)</strong>
+                    <p>Market Validation & Perf. Optimization</p>
+                </div>
+                <div class="timeline-step">
+                    <strong>Long-Term (6m+)</strong>
+                    <p>Competitive Positioning & Compliance</p>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

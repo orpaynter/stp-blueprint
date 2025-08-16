@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OrPaynter Platform Overview</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #e0e0e0;
+      font-family: 'Inter', sans-serif, 'PingFang SC', 'Microsoft YaHei';
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background-color: #F8F9FA;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      background-color: #1E40AF;
+      z-index: 10;
+    }
+    
+    .header {
+      padding: 50px 80px 30px 80px;
+      animation: fadeInDown 0.8s ease-out forwards;
+    }
+
+    .header h1 {
+      font-size: 48px;
+      font-weight: 700;
+      color: #1E40AF;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 60px;
+      padding: 0 80px 50px 80px;
+      flex-grow: 1;
+    }
+    
+    .left-column {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 10px;
+        animation: fadeInLeft 1s ease-out 0.2s forwards;
+        opacity: 0;
+    }
+
+    .right-column {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 10px;
+        animation: fadeInRight 1s ease-out 0.2s forwards;
+        opacity: 0;
+    }
+    
+    .section {
+        margin-bottom: 35px;
+    }
+
+    .section h2 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #111827;
+      margin-top: 0;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #D1D5DB;
+    }
+
+    .section ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .section li {
+      font-size: 17px;
+      color: #374151;
+      line-height: 1.7;
+      margin-bottom: 12px;
+      padding-left: 30px;
+      position: relative;
+    }
+    
+    .section li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 2px;
+      color: #1E40AF;
+      font-size: 20px;
+      font-weight: 600;
+    }
+    
+    .section li strong {
+        font-weight: 600;
+        color: #1E40AF;
+    }
+    
+    .right-column .section:last-child {
+        margin-bottom: 0;
+    }
+    
+    .footer {
+        position: absolute;
+        bottom: 30px;
+        right: 80px;
+        font-size: 20px;
+        font-weight: 700;
+        color: #1E40AF;
+        opacity: 0.8;
+    }
+
+    .image-placeholder {
+        height: 100%;
+        background: linear-gradient(135deg, rgba(30, 64, 175, 0.9), rgba(59, 130, 246, 0.8)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><path d="M0 10 L10 0 L20 10 L10 20 Z" fill="rgba(255,255,255,0.05)"/><path d="M20 30 L30 20 L40 30 L30 40 Z" fill="rgba(255,255,255,0.05)"/><path d="M40 50 L50 40 L60 50 L50 60 Z" fill="rgba(255,255,255,0.05)"/><path d="M60 70 L70 60 L80 70 L70 80 Z" fill="rgba(255,255,255,0.05)"/><path d="M80 90 L90 80 L100 90 L90 100 Z" fill="rgba(255,255,255,0.05)"/><path d="M-10 30 L0 20 L10 30 L0 40 Z" fill="rgba(255,255,255,0.05)"/><path d="M10 50 L20 40 L30 50 L20 60 Z" fill="rgba(255,255,255,0.05)"/><path d="M30 70 L40 60 L50 70 L40 80 Z" fill="rgba(255,255,255,0.05)"/><path d="M50 90 L60 80 L70 90 L60 100 Z" fill="rgba(255,255,255,0.05)"/><path d="M70 110 L80 100 L90 110 L80 120 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+        background-size: cover;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        padding: 40px;
+        box-sizing: border-box;
+    }
+
+    .image-placeholder h3 {
+        font-size: 28px;
+        font-weight: 700;
+        margin: 0 0 15px 0;
+        border-bottom: 2px solid rgba(255,255,255,0.5);
+        padding-bottom: 15px;
+    }
+
+    .image-placeholder p {
+        font-size: 18px;
+        line-height: 1.6;
+        opacity: 0.9;
+        margin: 0;
+    }
+
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="header">
+      <h1>Platform Overview</h1>
+    </div>
+    
+    <div class="content-grid">
+      <div class="left-column">
+        <div class="image-placeholder">
+            <h3>The OrPaynter Ecosystem</h3>
+            <p>A technology-first approach to solving traditional industry challenges by connecting key stakeholders in a unified, intelligent platform.</p>
+        </div>
+      </div>
+      
+      <div class="right-column">
+        <div class="section">
+          <h2>What OrPaynter Does</h2>
+          <ul>
+            <li><strong>AI-powered platform</strong> revolutionizing the roofing industry</li>
+            <li>Connects 4 key stakeholders: <strong>Homeowners, Contractors, Insurance, Suppliers</strong></li>
+            <li>Unified ecosystem for projects from <strong>damage assessment to completion</strong></li>
+          </ul>
+        </div>
+        
+        <div class="section">
+          <h2>Core Capabilities & Market Positioning</h2>
+          <ul>
+            <li>AI-driven <strong>damage detection</strong> & automated <strong>cost estimation</strong></li>
+            <li>Intelligent <strong>contractor-homeowner matching</strong> & project planning</li>
+            <li>Streamlined <strong>insurance claim processing</strong> and validation</li>
+            <li>Integrated <strong>supplier marketplace</strong> creating powerful network effects</li>
+            <li>Positioned as the <strong>first comprehensive AI platform</strong> for roofing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+        OrPaynter
+    </div>
+  </div>
+</body>
+</html>

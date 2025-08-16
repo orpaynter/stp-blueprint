@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Competition Analysis - OrPaynter</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f2f5;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background: linear-gradient(135deg, #0a192f 0%, #172a46 100%);
+      color: #e6f1ff;
+      display: flex;
+      flex-direction: column;
+      padding: 40px 60px;
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .slide::before {
+        content: 'OrPaynter';
+        position: absolute;
+        top: 20px;
+        left: 60px;
+        font-size: 18px;
+        font-weight: 700;
+        color: #64ffda;
+        opacity: 0.8;
+    }
+
+    .slide-header {
+      text-align: center;
+      margin-bottom: 25px;
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    .slide-header h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin: 0;
+      color: #ccd6f6;
+    }
+
+    .slide-header p {
+      font-size: 22px;
+      font-weight: 400;
+      margin: 5px 0 0;
+      color: #8892b0;
+    }
+
+    .main-content {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 30px;
+      flex-grow: 1;
+      height: calc(100% - 180px); /* Adjusted for header and footer */
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .card {
+      background: rgba(42, 63, 95, 0.4);
+      border-radius: 12px;
+      padding: 18px 22px;
+      border: 1px solid rgba(100, 255, 218, 0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      animation: fadeInUp 0.8s ease-out forwards;
+      opacity: 0;
+    }
+    
+    .column-left .card:nth-child(1) { animation-delay: 0.2s; }
+    .column-left .card:nth-child(2) { animation-delay: 0.3s; }
+    .column-left .card:nth-child(3) { animation-delay: 0.4s; }
+    .column-right .card:nth-child(1) { animation-delay: 0.5s; }
+    .column-right .card:nth-child(2) { animation-delay: 0.6s; }
+    .column-right .card:nth-child(3) { animation-delay: 0.7s; }
+
+    .card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #64ffda;
+      margin: 0 0 10px 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .card ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .card li {
+      font-size: 15px;
+      font-weight: 300;
+      color: #a8b2d1;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+    
+    .card li strong {
+        font-weight: 600;
+        color: #ccd6f6;
+    }
+
+    .limitations {
+      padding-left: 20px;
+      margin-top: 5px;
+      border-left: 2px solid #64ffda33;
+    }
+
+    .limitations li::before {
+      content: '–';
+      margin-right: 8px;
+      color: #64ffda;
+    }
+    
+    .advantages-list li {
+        padding-left: 25px;
+        position: relative;
+    }
+
+    .advantages-list li::before {
+        content: '•';
+        position: absolute;
+        left: 5px;
+        color: #64ffda;
+        font-size: 20px;
+        line-height: 1;
+    }
+
+    .slide-footer {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 30px;
+      margin-top: 25px;
+      animation: fadeInUp 0.8s ease-out 0.9s forwards;
+      opacity: 0;
+    }
+
+    .footer-card {
+        background: rgba(42, 63, 95, 0.4);
+        border-radius: 12px;
+        padding: 15px 20px;
+        border: 1px solid rgba(100, 255, 218, 0.1);
+    }
+
+    .footer-card h4 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #ccd6f6;
+      margin: 0 0 10px 0;
+    }
+
+    .footer-card ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-card li {
+      font-size: 14px;
+      color: #a8b2d1;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-card li::before {
+      content: '✓';
+      color: #64ffda;
+      font-size: 18px;
+      margin-right: 10px;
+    }
+
+    .opportunity p {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.5;
+        color: #a8b2d1;
+    }
+    
+    .opportunity strong {
+        font-size: 24px;
+        font-weight: 700;
+        color: #64ffda;
+    }
+    
+    @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <header class="slide-header">
+      <h1>Competition Analysis</h1>
+      <p>Clear Differentiation in a Fragmented Market</p>
+    </header>
+
+    <main class="main-content">
+      <div class="column column-left">
+        <div class="card">
+          <h3>Traditional Software</h3>
+          <ul>
+            <li><strong>Competitors:</strong> JobNimbus, AccuLynx, Roofing CRMs</li>
+            <ul class="limitations">
+              <li>No AI capabilities</li>
+              <li>Siloed workflows & limited integrations</li>
+              <li><strong>Market Share:</strong> 15% of contractors use any digital tools</li>
+            </ul>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Insurance Tech</h3>
+          <ul>
+            <li><strong>Competitors:</strong> Hover, EagleView, Symbility</li>
+            <ul class="limitations">
+              <li>Insurance-only focus, no marketplace</li>
+              <li>Limited contractor tools</li>
+              <li><strong>Position:</strong> Point solutions, not comprehensive platforms</li>
+            </ul>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>General Construction</h3>
+          <ul>
+            <li><strong>Competitors:</strong> Procore, Autodesk Construction Cloud</li>
+            <ul class="limitations">
+              <li>Not roofing-specific</li>
+              <li>Expensive & complex for SMB contractors</li>
+              <li><strong>Focus:</strong> Large construction projects, not residential</li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+      <div class="column column-right">
+        <div class="card">
+          <h3>🏆 Technology Superiority</h3>
+          <ul class="advantages-list">
+            <li><strong>Only comprehensive AI platform</strong> for roofing</li>
+            <li><strong>97% damage detection accuracy</strong> vs 60-75%</li>
+            <li><strong>Sub-30 second processing</strong> vs 5-15 minutes</li>
+            <li><strong>Proprietary roofing datasets</strong> & specialized ML models</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>🏆 Market Position</h3>
+          <ul class="advantages-list">
+            <li><strong>First unified marketplace</strong> connecting all stakeholders</li>
+            <li><strong>Multi-sided network effects</strong> create moats</li>
+            <li><strong>End-to-end workflow</strong> vs point solutions</li>
+            <li><strong>SMB-focused pricing</strong> vs enterprise-only</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>🏆 Business Model</h3>
+          <ul class="advantages-list">
+            <li><strong>Multiple revenue streams</strong> vs single subscription</li>
+            <li><strong>Lower CAC</strong> through network effects</li>
+            <li><strong>Higher switching costs</strong> due to ecosystem lock-in</li>
+            <li><strong>Faster time-to-value</strong> for customers</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+
+    <footer class="slide-footer">
+        <div class="footer-card barriers">
+            <h4>Competitive Barriers</h4>
+            <ul>
+                <li>Data network effects - platform improves with usage</li>
+                <li>Proprietary AI models - 500K+ image training dataset</li>
+                <li>Multi-stakeholder ecosystem - difficult to replicate</li>
+                <li>First-mover advantage in AI-powered roofing solutions</li>
+            </ul>
+        </div>
+        <div class="footer-card opportunity">
+            <h4>Market Opportunity</h4>
+            <p><strong>85%</strong> of roofing contractors still use manual processes, creating massive whitespace for an AI-first platform.</p>
+        </div>
+    </footer>
+  </div>
+</body>
+</html>

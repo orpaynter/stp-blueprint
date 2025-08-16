@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OrPaynter - Financial Projections</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    :root {
+      --bg-color: #0a192f;
+      --card-bg: #112240;
+      --text-primary: #ccd6f6;
+      --text-secondary: #8892b0;
+      --accent-color: #64ffda;
+      --accent-darker: #13a288;
+      --border-color: #233554;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f0f0;
+      font-family: 'Poppins', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      padding: 40px 50px;
+      box-sizing: border-box;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 25px;
+    }
+
+    .header h1 {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0;
+      letter-spacing: 1px;
+    }
+    
+    .header .brand {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--accent-color);
+      padding: 8px 16px;
+      border: 1px solid var(--accent-color);
+      border-radius: 4px;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 25px;
+      flex-grow: 1;
+      height: calc(100% - 110px);
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+      animation: slideUp 0.6s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes slideUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+    
+    .card:nth-child(1) { animation-delay: 0.2s; }
+    .card:nth-child(2) { animation-delay: 0.3s; grid-column: 2 / 4; grid-row: 1 / 2; }
+    .card:nth-child(3) { animation-delay: 0.4s; }
+    .card:nth-child(4) { animation-delay: 0.5s; }
+    .card:nth-child(5) { animation-delay: 0.6s; }
+
+    .card h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--accent-color);
+      margin: 0 0 15px 0;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 10px;
+    }
+    
+    .card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 15px 0 8px 0;
+    }
+
+    .card ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin: 0;
+      font-size: 14px;
+      color: var(--text-secondary);
+      flex-grow: 1;
+    }
+
+    .card ul li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+      padding-left: 18px;
+      position: relative;
+    }
+    
+    .card ul li::before {
+      content: '•';
+      color: var(--accent-color);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .highlight {
+      color: var(--accent-color);
+      font-weight: 600;
+    }
+
+    .total-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-color);
+      text-align: right;
+    }
+    
+    #year1-projections {
+      grid-row: 1 / 3;
+      grid-column: 1 / 2;
+    }
+    
+    #growth-trajectory {
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .chart-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      padding: 20px 0 0 0;
+      position: relative;
+      background: linear-gradient(to top, rgba(100, 255, 218, 0.05), transparent);
+      border-radius: 4px;
+    }
+    
+    .chart-bar {
+      width: 60px;
+      background-color: var(--accent-color);
+      border-radius: 4px 4px 0 0;
+      position: relative;
+      animation: growUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      transform-origin: bottom;
+      box-shadow: 0 0 15px rgba(100, 255, 218, 0.3);
+    }
+    
+    @keyframes growUp {
+        from { transform: scaleY(0); }
+        to { transform: scaleY(1); }
+    }
+    
+    .bar-y1 { height: 25%; animation-delay: 0.8s; }
+    .bar-y2 { height: 60%; animation-delay: 1.0s; }
+    .bar-y3 { height: 100%; animation-delay: 1.2s; }
+    
+    .bar-label {
+      position: absolute;
+      bottom: -40px;
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    
+    .bar-value {
+      position: absolute;
+      top: -30px;
+      width: 100%;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    
+    #roi-analysis {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .roi-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        width: 100%;
+        margin-top: 10px;
+    }
+    
+    .roi-metric {
+        text-align: center;
+        background-color: #0a192f;
+        padding: 15px 10px;
+        border-radius: 4px;
+    }
+    
+    .roi-value {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--accent-color);
+        line-height: 1.2;
+    }
+    
+    .roi-label {
+        font-size: 13px;
+        color: var(--text-secondary);
+        margin-top: 5px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="header">
+      <h1>Financial Projections</h1>
+      <div class="brand">OrPaynter</div>
+    </div>
+    <div class="content-grid">
+      
+      <div class="card" id="year1-projections">
+        <h2>Year 1 Revenue Projections</h2>
+        <h3>Target Customer Acquisition</h3>
+        <ul>
+          <li>150 Starter ($99/mo) = <span class="highlight">$178,200 ARR</span></li>
+          <li>75 Professional ($299/mo) = <span class="highlight">$268,200 ARR</span></li>
+          <li>25 Enterprise ($999/mo) = <span class="highlight">$299,700 ARR</span></li>
+          <li>Marketplace commissions = <span class="highlight">$180,000</span></li>
+        </ul>
+        <p class="total-value">Total Year 1 ARR: $926,100</p>
+        
+        <h3>Conservative Growth Model</h3>
+        <ul>
+          <li>Month 1-3: Beta launch (20 customers)</li>
+          <li>Month 4-6: Market entry (75 customers)</li>
+          <li>Month 7-9: Scale phase (150 customers)</li>
+          <li>Month 10-12: Optimization (250 customers)</li>
+        </ul>
+      </div>
+
+      <div class="card" id="growth-trajectory">
+        <h2>3-Year Growth Trajectory (ARR)</h2>
+        <div class="chart-container">
+            <div class="chart-bar bar-y1">
+                <div class="bar-value">$926K</div>
+                <div class="bar-label">Year 1</div>
+            </div>
+            <div class="chart-bar bar-y2">
+                <div class="bar-value">$2.8M</div>
+                <div class="bar-label">Year 2</div>
+            </div>
+            <div class="chart-bar bar-y3">
+                <div class="bar-value">$6.2M</div>
+                <div class="bar-label">Year 3</div>
+            </div>
+        </div>
+      </div>
+
+      <div class="card" id="investment">
+        <h2>Investment Requirements</h2>
+        <ul>
+          <li>Development completion: <span class="highlight">$200K (8-12 wks)</span></li>
+          <li>Go-to-market: <span class="highlight">$300K (marketing, sales)</span></li>
+          <li>Operations scaling: <span class="highlight">$150K (support, infra)</span></li>
+        </ul>
+        <p class="total-value">Total Investment: $650,000</p>
+      </div>
+
+      <div class="card" id="roi-analysis">
+        <h2>ROI Analysis</h2>
+        <div class="roi-grid">
+            <div class="roi-metric">
+                <div class="roi-value">853%</div>
+                <div class="roi-label">3-Year ROI</div>
+            </div>
+            <div class="roi-metric">
+                <div class="roi-value">14</div>
+                <div class="roi-label">Payback Period (Months)</div>
+            </div>
+            <div class="roi-metric">
+                <div class="roi-value">$8,400</div>
+                <div class="roi-label">Customer LTV</div>
+            </div>
+            <div class="roi-metric">
+                <div class="roi-value">8</div>
+                <div class="roi-label">CAC Payback (Months)</div>
+            </div>
+        </div>
+      </div>
+      
+      <div class="card" id="key-metrics">
+        <h2>Key Metrics</h2>
+        <ul>
+            <li>Monthly churn target: <span class="highlight">&lt; 5%</span></li>
+            <li>Gross margin: <span class="highlight">85%+</span> (SaaS model)</li>
+            <li>Market penetration: <span class="highlight">&lt; 1% by Year 3</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

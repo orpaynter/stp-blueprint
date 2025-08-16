@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OrPaynter - Financial Projections</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f2f5;
+      font-family: 'Poppins', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei';
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background: linear-gradient(135deg, #ffffff 0%, #f7f9fc 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 40px;
+      box-sizing: border-box;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .slide::before {
+        content: 'OrPaynter';
+        position: absolute;
+        top: 25px;
+        left: 40px;
+        font-size: 20px;
+        font-weight: 700;
+        color: #004d99;
+        opacity: 0.8;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 25px;
+      animation: slideUp 0.8s ease-out;
+    }
+
+    .header h1 {
+      font-size: 48px;
+      font-weight: 700;
+      color: #1a2333;
+      margin: 0;
+    }
+
+    .header h2 {
+      font-size: 22px;
+      font-weight: 400;
+      color: #5a677d;
+      margin: 5px 0 0 0;
+    }
+    
+    .projections-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 25px;
+        gap: 15px;
+    }
+
+    .year-card {
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 15px;
+        box-sizing: border-box;
+        flex: 1;
+        box-shadow: 0 4px 15px rgba(0, 77, 153, 0.05);
+        border: 1px solid #e0e5ec;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        animation: slideUp 0.8s ease-out forwards;
+        opacity: 0;
+    }
+    
+    .year-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 25px rgba(0, 77, 153, 0.12);
+    }
+    
+    .year-card:nth-child(1) { animation-delay: 0.2s; }
+    .year-card:nth-child(2) { animation-delay: 0.3s; }
+    .year-card:nth-child(3) { animation-delay: 0.4s; }
+    .year-card:nth-child(4) { animation-delay: 0.5s; }
+    .year-card:nth-child(5) { animation-delay: 0.6s; }
+
+    .year-card h3 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #004d99;
+        margin: 0 0 10px 0;
+        text-align: center;
+        border-bottom: 1px solid #e0e5ec;
+        padding-bottom: 8px;
+    }
+
+    .year-card .arr {
+        font-size: 24px;
+        font-weight: 700;
+        color: #00b386;
+        text-align: center;
+        margin: 0 0 12px 0;
+    }
+
+    .year-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 12px;
+        color: #5a677d;
+        flex-grow: 1;
+    }
+    
+    .year-card ul li {
+        margin-bottom: 6px;
+        line-height: 1.5;
+        display: flex;
+        align-items: flex-start;
+    }
+    
+    .year-card ul li::before {
+        content: '•';
+        color: #007bff;
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+    }
+
+    .year-card .focus {
+        font-size: 12px;
+        font-weight: 600;
+        color: #1a2333;
+        margin-top: auto;
+        padding-top: 10px;
+        border-top: 1px solid #e0e5ec;
+    }
+    .year-card .focus span {
+        font-weight: 400;
+        color: #5a677d;
+    }
+    
+    .bottom-container {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr 1.2fr;
+        gap: 25px;
+        width: 100%;
+        animation: slideUp 0.8s ease-out 0.7s forwards;
+        opacity: 0;
+    }
+
+    .info-box {
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0, 77, 153, 0.05);
+        border: 1px solid #e0e5ec;
+    }
+
+    .info-box h4 {
+        font-size: 18px;
+        font-weight: 600;
+        color: #1a2333;
+        margin: 0 0 15px 0;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 8px;
+        display: inline-block;
+    }
+    
+    .metrics-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .metrics-list li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        padding: 6px 0;
+        color: #5a677d;
+        border-bottom: 1px dashed #e0e5ec;
+    }
+    
+    .metrics-list li:last-child {
+        border-bottom: none;
+    }
+
+    .metrics-list li strong {
+        font-weight: 600;
+        color: #1a2333;
+    }
+
+    .metrics-list li .value {
+        font-weight: 700;
+        font-size: 15px;
+        color: #004d99;
+        background-color: #e6f2ff;
+        padding: 2px 8px;
+        border-radius: 6px;
+    }
+    
+    .metrics-list li .value.excellent {
+        color: #00b386;
+        background-color: #e6f7f3;
+    }
+
+    .funds-container {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .donut-chart {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: conic-gradient(
+            #0052cc 0% 60%, 
+            #00b386 60% 85%, 
+            #ffab00 85% 100%
+        );
+        flex-shrink: 0;
+    }
+
+    .funds-legend {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+    }
+
+    .funds-legend li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+
+    .funds-legend li .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+    
+    .funds-legend li span {
+        font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="header">
+      <h1>Financial Projections</h1>
+      <h2>Clear Path to Profitability and Scale</h2>
+    </div>
+
+    <div class="projections-container">
+      <!-- Year 1 -->
+      <div class="year-card">
+        <h3>Year 1 (2025)</h3>
+        <p class="arr">$926K ARR</p>
+        <ul>
+          <li>250 customers</li>
+          <li>$77K MRR by EOY</li>
+        </ul>
+        <p class="focus">Focus: <span>Market validation and product-market fit.</span></p>
+      </div>
+      <!-- Year 2 -->
+      <div class="year-card">
+        <h3>Year 2 (2026)</h3>
+        <p class="arr">$2.8M ARR</p>
+        <ul>
+          <li>750 customers</li>
+          <li>200% growth</li>
+        </ul>
+        <p class="focus">Focus: <span>Geographic expansion to 12 states.</span></p>
+      </div>
+      <!-- Year 3 -->
+      <div class="year-card">
+        <h3>Year 3 (2027)</h3>
+        <p class="arr">$6.2M ARR</p>
+        <ul>
+          <li>1,650 customers</li>
+          <li>121% growth</li>
+        </ul>
+        <p class="focus">Focus: <span>National coverage and international planning.</span></p>
+      </div>
+      <!-- Year 4 -->
+      <div class="year-card">
+        <h3>Year 4 (2028)</h3>
+        <p class="arr">$12.5M ARR</p>
+        <ul>
+          <li>3,200 customers</li>
+          <li>102% growth</li>
+        </ul>
+        <p class="focus">Focus: <span>Canada and UK market entry.</span></p>
+      </div>
+      <!-- Year 5 -->
+      <div class="year-card">
+        <h3>Year 5 (2029)</h3>
+        <p class="arr">$22.8M ARR</p>
+        <ul>
+          <li>5,800 customers</li>
+          <li>82% growth</li>
+        </ul>
+        <p class="focus">Focus: <span>Platform ecosystem and adjacent markets.</span></p>
+      </div>
+    </div>
+    
+    <div class="bottom-container">
+      <div class="info-box">
+        <h4>Unit Economics & Key Metrics</h4>
+        <ul class="metrics-list">
+          <li><strong>Customer Lifetime Value (LTV)</strong> <span class="value">$8,400</span></li>
+          <li><strong>Customer Acquisition Cost (CAC)</strong> <span class="value">$150</span></li>
+          <li><strong>LTV/CAC Ratio</strong> <span class="value excellent">56:1</span></li>
+          <li><strong>Gross Margin</strong> <span class="value excellent">87%</span></li>
+          <li><strong>Monthly Churn</strong> <span class="value excellent">&lt;5%</span></li>
+          <li><strong>Net Revenue Retention</strong> <span class="value excellent">125%</span></li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <h4>Path to Profitability</h4>
+        <ul class="metrics-list">
+          <li><strong>Breakeven</strong> <span class="value">Month 18</span></li>
+          <li><strong>Positive Cash Flow</strong> <span class="value">Month 24</span></li>
+          <li><strong>EBITDA Positive</strong> <span class="value excellent">35% by Y3</span></li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <h4>Use of Investment Funds</h4>
+        <div class="funds-container">
+            <div class="donut-chart"></div>
+            <ul class="funds-legend">
+                <li><span class="dot" style="background-color: #0052cc;"></span><span><strong>60%</strong> Product & Eng.</span></li>
+                <li><span class="dot" style="background-color: #00b386;"></span><span><strong>25%</strong> Sales & Mktg.</span></li>
+                <li><span class="dot" style="background-color: #ffab00;"></span><span><strong>15%</strong> Operations</span></li>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

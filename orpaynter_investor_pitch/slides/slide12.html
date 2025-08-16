@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Presentation Slide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #e0e0e0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background: linear-gradient(135deg, #1a2333, #111827);
+      color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      padding: 45px 60px;
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    
+    .header h1 {
+      font-size: 56px;
+      font-weight: 700;
+      color: #F9A826;
+      margin: 0;
+      padding: 0;
+      letter-spacing: 1px;
+    }
+
+    .header .subtitle {
+      font-size: 22px;
+      font-weight: 300;
+      color: #d1d5db;
+      margin: 5px 0 25px 0;
+      opacity: 0.9;
+    }
+
+    .main-content {
+      display: flex;
+      flex: 1;
+      gap: 40px;
+      height: calc(100% - 110px);
+    }
+
+    .left-column {
+      flex: 0 0 65%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .leadership-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 20px;
+      flex-grow: 1;
+    }
+
+    .team-card {
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-5px);
+      background-color: rgba(255, 255, 255, 0.07);
+      border-color: #F9A826;
+    }
+
+    .team-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #ffffff;
+      margin: 0;
+    }
+
+    .team-card p {
+      font-size: 15px;
+      color: #F9A826;
+      font-weight: 400;
+      margin: 2px 0 12px 0;
+    }
+
+    .team-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex-grow: 1;
+    }
+
+    .team-card li {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.6;
+      margin-bottom: 6px;
+      padding-left: 20px;
+      position: relative;
+      color: #d1d5db;
+    }
+
+    .team-card li::before {
+      content: '•';
+      color: #F9A826;
+      font-weight: bold;
+      display: inline-block;
+      width: 20px;
+      margin-left: -20px;
+      position: absolute;
+      top: 0;
+    }
+    
+    .team-card li b {
+        font-weight: 600;
+        color: #e5e7eb;
+    }
+
+    .right-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .right-column > div {
+      background-color: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      padding: 15px 20px;
+      flex-shrink: 0;
+    }
+
+    .right-column h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #F9A826;
+      margin: 0 0 10px 0;
+      padding-bottom: 5px;
+      border-bottom: 1px solid rgba(249, 168, 38, 0.3);
+    }
+    
+    .right-column ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .right-column li {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: #d1d5db;
+      margin-bottom: 8px;
+      padding-left: 22px;
+      position: relative;
+    }
+    
+    .stats-section li::before {
+      content: '›';
+      color: #F9A826;
+      font-size: 20px;
+      position: absolute;
+      left: 0;
+      top: -2px;
+    }
+
+    .advisory-section li::before {
+      content: '›';
+      color: #F9A826;
+      font-size: 20px;
+      position: absolute;
+      left: 0;
+      top: -2px;
+    }
+
+    .track-record-section li::before {
+      content: '✓';
+      color: #2ECC71;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+      top: 1px;
+    }
+    
+    .right-column li b {
+        font-weight: 600;
+        color: #e5e7eb;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="header">
+      <h1>Our Team</h1>
+      <p class="subtitle">Proven Experience in AI, Construction, and Scale</p>
+    </div>
+    <div class="main-content">
+      <div class="left-column">
+        <div class="leadership-grid">
+          <div class="team-card">
+            <h3>CEO & Founder</h3>
+            <p>MiniMax Agent</p>
+            <ul>
+              <li><b>15+ years</b> building AI and SaaS platforms</li>
+              <li><b>Previously:</b> Led product at construction tech unicorn (3x revenue growth)</li>
+              <li><b>Deep expertise:</b> Machine learning, computer vision, enterprise software</li>
+              <li><b>Education:</b> MS Computer Science, Stanford; MBA, Wharton</li>
+            </ul>
+          </div>
+          <div class="team-card">
+            <h3>CTO & Co-Founder</h3>
+            <p>[Technical Lead]</p>
+            <ul>
+              <li><b>12+ years</b> in AI/ML engineering and platform architecture</li>
+              <li><b>Previously:</b> Senior Engineering Manager at Google (TensorFlow team)</li>
+              <li><b>Specialization:</b> Distributed systems, computer vision, production ML</li>
+              <li><b>Education:</b> PhD Computer Science, MIT</li>
+            </ul>
+          </div>
+          <div class="team-card">
+            <h3>VP Sales</h3>
+            <p>[Sales Leader]</p>
+            <ul>
+              <li><b>10+ years</b> in B2B SaaS sales and go-to-market strategy</li>
+              <li><b>Previously:</b> VP Sales at roofing software company (0-$50M ARR)</li>
+              <li><b>Network:</b> Deep relationships across roofing industry</li>
+              <li><b>Track record:</b> Built and scaled sales teams from 1 to 50+ people</li>
+            </ul>
+          </div>
+          <div class="team-card">
+            <h3>VP Product</h3>
+            <p>[Product Expert]</p>
+            <ul>
+              <li><b>8+ years</b> in product management for construction and AI products</li>
+              <li><b>Previously:</b> Senior PM at Autodesk Construction Solutions</li>
+              <li><b>Expertise:</b> User experience design, product-market fit, construction workflows</li>
+              <li><b>Customer focus:</b> 500+ interviews with contractors</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="right-column">
+        <div class="stats-section">
+          <h2>Key Team Statistics</h2>
+          <ul>
+            <li><b>12 full-time employees</b> across key functions</li>
+            <li><b>75% engineering team</b> focused on AI & platform</li>
+            <li><b>$3M+ collective fundraising</b> experience</li>
+            <li><b>50+ years combined experience</b> in target market</li>
+          </ul>
+        </div>
+        <div class="advisory-section">
+          <h2>Advisory Board</h2>
+          <ul>
+            <li>Former CEO of major roofing contractor</li>
+            <li>VP of Innovation at top insurance carrier</li>
+            <li>AI research scientist from Stanford</li>
+            <li>B2B SaaS growth marketing expert</li>
+          </ul>
+        </div>
+        <div class="track-record-section">
+            <h2>Execution Track Record</h2>
+            <ul>
+                <li>Delivered 100% platform validation on time</li>
+                <li>Launched beta with 250+ users in 6 months</li>
+                <li>Proprietary AI models achieved 97% accuracy</li>
+                <li>Secured partnerships with 3 major carriers</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

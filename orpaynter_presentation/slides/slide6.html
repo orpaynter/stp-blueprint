@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technology Stack</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #0a0f1e;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background: linear-gradient(135deg, #0a0f1e 0%, #1a233a 100%);
+      color: #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .slide-header {
+      text-align: center;
+      padding: 30px 0;
+    }
+
+    .slide-header h1 {
+      font-size: 48px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-shadow: 0 0 15px rgba(0, 245, 212, 0.3);
+    }
+
+    .main-content {
+      flex-grow: 1;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 25px;
+      padding: 0 40px 40px 40px;
+      align-items: center;
+    }
+
+    .stack-column {
+      background: rgba(26, 35, 58, 0.6);
+      border: 1px solid rgba(0, 245, 212, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(5px);
+      animation: slideUp 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    .stack-column:nth-child(1) { animation-delay: 0.2s; }
+    .stack-column:nth-child(2) { animation-delay: 0.4s; }
+    .stack-column:nth-child(3) { animation-delay: 0.6s; }
+    .stack-column:nth-child(4) { animation-delay: 0.8s; }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .stack-column h2 {
+      font-size: 22px;
+      font-weight: 600;
+      margin: 0 0 15px 0;
+      padding-bottom: 10px;
+      border-bottom: 2px solid;
+    }
+
+    .frontend h2 { color: #00f5d4; border-color: #00f5d4; }
+    .backend h2 { color: #00aaff; border-color: #00aaff; }
+    .ai-ml h2 { color: #9b5de5; border-color: #9b5de5; }
+    .infra h2 { color: #f7b801; border-color: #f7b801; }
+
+    .stack-column ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex-grow: 1;
+    }
+
+    .stack-column li {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.6;
+      margin-bottom: 10px;
+      padding-left: 25px;
+      position: relative;
+    }
+
+    .stack-column li::before {
+      content: '▶';
+      position: absolute;
+      left: 0;
+      top: 1px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    
+    .frontend li::before { color: #00f5d4; }
+    .backend li::before { color: #00aaff; }
+    .ai-ml li::before { color: #9b5de5; }
+    .infra li::before { color: #f7b801; }
+
+    .stack-column li strong {
+      font-weight: 600;
+      color: #fff;
+    }
+    
+    .stack-diagram-container {
+      grid-column: 2 / 3;
+      grid-row: 1 / 3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 1000px;
+      animation: fadeIn 1.5s 1s ease-in-out forwards;
+      opacity: 0;
+    }
+
+    .stack-diagram {
+      width: 300px;
+      height: 400px;
+      position: relative;
+      transform-style: preserve-3d;
+      transform: rotateX(0deg) rotateY(-20deg);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: rotateX(0deg) rotateY(-20deg) translateY(0px); }
+      50% { transform: rotateX(5deg) rotateY(-20deg) translateY(-15px); }
+    }
+
+    .stack-layer {
+      position: absolute;
+      width: 100%;
+      height: 50px;
+      border: 2px solid;
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transform-style: preserve-3d;
+    }
+
+    .stack-layer::before, .stack-layer::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 2px solid;
+      background: rgba(255, 255, 255, 0.02);
+      box-sizing: border-box;
+    }
+    
+    .stack-layer::before {
+      height: 40px;
+      transform-origin: top;
+      transform: rotateX(-90deg);
+      top: 0;
+    }
+    .stack-layer::after {
+      width: 40px;
+      transform-origin: left;
+      transform: rotateY(90deg);
+      left: 0;
+    }
+
+    .layer-frontend {
+      top: 0;
+      transform: translateZ(100px);
+      border-color: #00f5d4;
+      color: #00f5d4;
+      text-shadow: 0 0 10px #00f5d4;
+    }
+    .layer-frontend::before, .layer-frontend::after { border-color: #00f5d4; }
+
+    .layer-backend {
+      top: 80px;
+      transform: translateZ(60px);
+      border-color: #00aaff;
+      color: #00aaff;
+      text-shadow: 0 0 10px #00aaff;
+    }
+    .layer-backend::before, .layer-backend::after { border-color: #00aaff; }
+
+    .layer-ai {
+      top: 160px;
+      transform: translateZ(20px);
+      border-color: #9b5de5;
+      color: #9b5de5;
+      text-shadow: 0 0 10px #9b5de5;
+    }
+    .layer-ai::before, .layer-ai::after { border-color: #9b5de5; }
+    
+    .layer-infra {
+      top: 240px;
+      transform: translateZ(-20px);
+      border-color: #f7b801;
+      color: #f7b801;
+      text-shadow: 0 0 10px #f7b801;
+    }
+    .layer-infra::before, .layer-infra::after { border-color: #f7b801; }
+
+    .orpaynter-logo {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 16px;
+      font-weight: 600;
+      color: #ffffff;
+      opacity: 0.5;
+    }
+    .orpaynter-logo span {
+      font-weight: 300;
+      opacity: 0.8;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-header">
+      <h1>Technology Stack</h1>
+    </div>
+
+    <div class="main-content">
+      <div class="stack-column frontend" style="grid-column: 1 / 2; grid-row: 1 / 2;">
+        <h2>Frontend Excellence</h2>
+        <ul>
+          <li><strong>React 18</strong> with <strong>TypeScript</strong> for type safety</li>
+          <li><strong>Vite</strong> for lightning-fast development builds</li>
+          <li><strong>Tailwind CSS</strong> for utility-first styling</li>
+          <li><strong>Radix UI</strong> for accessible component library</li>
+          <li>Modern toolchain optimized for performance</li>
+        </ul>
+      </div>
+
+      <div class="stack-column ai-ml" style="grid-column: 1 / 2; grid-row: 2 / 3;">
+        <h2>AI/ML Capabilities</h2>
+        <ul>
+          <li><strong>TensorFlow & PyTorch</strong> for deep learning</li>
+          <li><strong>OpenCV</strong> for computer vision processing</li>
+          <li><strong>Qdrant</strong> vector database for semantic search</li>
+          <li><strong>Custom ML models</strong> for damage detection</li>
+          <li><strong>Real-time inference</strong> capabilities</li>
+        </ul>
+      </div>
+
+      <div class="stack-diagram-container">
+        <div class="stack-diagram">
+          <div class="stack-layer layer-frontend">Frontend</div>
+          <div class="stack-layer layer-backend">Backend</div>
+          <div class="stack-layer layer-ai">AI / ML</div>
+          <div class="stack-layer layer-infra">Infrastructure</div>
+        </div>
+      </div>
+
+      <div class="stack-column backend" style="grid-column: 3 / 4; grid-row: 1 / 2;">
+        <h2>Backend Power</h2>
+        <ul>
+          <li><strong>FastAPI</strong> (Python) for high-performance APIs</li>
+          <li><strong>Asynchronous processing</strong> for scalability</li>
+          <li><strong>SQLAlchemy</strong> for database ORM</li>
+          <li><strong>Pydantic</strong> for data validation</li>
+          <li><strong>OpenAPI</strong> documentation generation</li>
+        </ul>
+      </div>
+
+      <div class="stack-column infra" style="grid-column: 3 / 4; grid-row: 2 / 3;">
+        <h2>Infrastructure & DevOps</h2>
+        <ul>
+          <li><strong>Docker</strong> containerization</li>
+          <li><strong>PostgreSQL, MongoDB, Redis</strong> multi-database</li>
+          <li><strong>API Gateway</strong> for service orchestration</li>
+          <li><strong>Microservices</strong> architecture</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="orpaynter-logo">OrPaynter <span>Branding</span></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Funding Ask - OrPaynter</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+    :root {
+      --brand-dark: #0A2540;
+      --brand-primary: #007BFF;
+      --brand-accent: #3ECF8E;
+      --text-light: #F6F9FC;
+      --text-dark: #333;
+      --text-secondary: #555;
+      --bg-light: #FFFFFF;
+      --bg-grey: #F6F9FC;
+      --border-color: #E6E6E6;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #EAEAEA;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    #ppt-container {
+      width: 1280px;
+      height: 720px;
+      background-color: var(--bg-light);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(15px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header {
+      padding: 30px 40px;
+      border-bottom: 1px solid var(--border-color);
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    .header h1 {
+      font-size: 36px;
+      color: var(--brand-dark);
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .header h2 {
+      font-size: 20px;
+      color: var(--brand-primary);
+      margin: 5px 0 0;
+      font-weight: 600;
+    }
+
+    .main-content {
+      display: grid;
+      grid-template-columns: 450px 1fr;
+      flex-grow: 1;
+    }
+
+    .left-column {
+      padding: 30px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background-color: var(--bg-grey);
+    }
+
+    .right-column {
+      padding: 30px 40px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    
+    .right-column::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-image: linear-gradient(45deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.9) 50%, rgba(62, 207, 142, 0.1) 100%);
+      z-index: 0;
+    }
+
+    .content-card {
+      background-color: var(--bg-light);
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      padding: 15px;
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+    
+    .left-column .content-card {
+        animation-delay: 0.2s;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--brand-dark);
+      margin: 0 0 10px 0;
+      border-bottom: 2px solid var(--brand-primary);
+      padding-bottom: 5px;
+    }
+
+    .card-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    
+    .card-list li {
+      padding: 4px 0;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .card-list li strong {
+      color: var(--text-dark);
+      min-width: 120px;
+      display: inline-block;
+    }
+
+    .exit-strategy p {
+        font-size: 14px;
+        color: var(--text-secondary);
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    .use-of-funds-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      flex-grow: 1;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .use-of-funds-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--brand-dark);
+        margin-bottom: 5px;
+        animation: fadeIn 0.5s ease-out forwards;
+        animation-delay: 0.4s;
+    }
+
+    .fund-category {
+      background-color: var(--bg-light);
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    .fund-category:nth-child(2) { animation-delay: 0.5s; }
+    .fund-category:nth-child(3) { animation-delay: 0.6s; }
+    .fund-category:nth-child(4) { animation-delay: 0.7s; }
+
+    .fund-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    
+    .fund-icon {
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+    }
+
+    .fund-title-group {
+      flex-grow: 1;
+    }
+
+    .fund-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--brand-dark);
+      margin: 0;
+    }
+    
+    .fund-amount {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--brand-primary);
+        margin: 2px 0 0;
+    }
+
+    .fund-percentage {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--brand-accent);
+    }
+    
+    .fund-details {
+        list-style-type: '•  ';
+        padding-left: 20px;
+        margin: 0;
+        font-size: 13px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+    }
+    
+    .fund-details li {
+        padding-bottom: 5px;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="ppt-container">
+    <div class="header">
+      <h1>Funding Ask</h1>
+      <h2>Series A: $3.5M to Accelerate Market Leadership</h2>
+    </div>
+    <div class="main-content">
+      <div class="left-column">
+        <div class="content-card">
+          <h3 class="card-title">Investment Summary</h3>
+          <ul class="card-list">
+            <li><strong>Funding Amount:</strong>$3.5M Series A</li>
+            <li><strong>Valuation:</strong>$15M pre-money</li>
+            <li><strong>Use of Funds:</strong>18-month runway</li>
+            <li><strong>Timeline:</strong>Close by Q3 2025</li>
+          </ul>
+        </div>
+        <div class="content-card">
+          <h3 class="card-title">Key Milestones with Funding</h3>
+          <ul class="card-list">
+            <li><strong>Month 6:</strong>500 paying customers, $200K MRR</li>
+            <li><strong>Month 12:</strong>1,200 customers, $500K MRR</li>
+            <li><strong>Month 18:</strong>Break-even, $750K MRR, Series B ready</li>
+          </ul>
+        </div>
+        <div class="content-card">
+          <h3 class="card-title">Investment Terms</h3>
+          <ul class="card-list">
+            <li><strong>Stock Type:</strong>Series A Preferred</li>
+            <li><strong>Board:</strong>5 members (2 founders, 2 investors, 1 ind.)</li>
+            <li><strong>Reporting:</strong>Quarterly reports & milestone tracking</li>
+            <li><strong>Anti-dilution:</strong>Weighted average broad-based</li>
+          </ul>
+        </div>
+        <div class="content-card exit-strategy">
+          <h3 class="card-title">Exit Strategy</h3>
+          <p>Strategic acquisition by insurance carrier, construction tech company, or IPO potential at $100M+ revenue.</p>
+        </div>
+      </div>
+      <div class="right-column">
+        <div class="use-of-funds-container">
+            <h3 class="use-of-funds-title">Detailed Use of Funds</h3>
+            <div class="fund-category">
+                <div class="fund-header">
+                    <svg class="fund-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-1.125 4.75a1.125 1.125 0 1 1-2.25 0 1.125 1.125 0 0 1 2.25 0zM12 8.25a.75.75 0 0 1 .75.75v6a.75.75 0 0 1-1.5 0v-6A.75.75 0 0 1 12 8.25zm4.125-1.5a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25zM12 15.75c-.69 0-1.25.56-1.25 1.25s.56 1.25 1.25 1.25 1.25-.56 1.25-1.25-.56-1.25-1.25-1.25z" fill="#0A2540"/></svg>
+                    <div class="fund-title-group">
+                        <h4 class="fund-title">Product & Engineering</h4>
+                        <p class="fund-amount">$2.1M</p>
+                    </div>
+                    <div class="fund-percentage">60%</div>
+                </div>
+                <ul class="fund-details">
+                    <li>Complete marketing website to core platform connection</li>
+                    <li>Advanced ML models and real-time processing optimization</li>
+                    <li>iOS and Android apps for field contractors</li>
+                    <li>Hire 8 additional engineers and AI specialists</li>
+                </ul>
+            </div>
+            <div class="fund-category">
+                <div class="fund-header">
+                    <svg class="fund-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.75 3a.75.75 0 0 0-.75.75v16.5a.75.75 0 0 0 .75.75h16.5a.75.75 0 0 0 .75-.75V3.75a.75.75 0 0 0-.75-.75H3.75zM6 6.75A.75.75 0 0 1 6.75 6h10.5a.75.75 0 0 1 0 1.5H6.75A.75.75 0 0 1 6 6.75zm.75 3a.75.75 0 0 0 0 1.5h10.5a.75.75 0 0 0 0-1.5H6.75zm0 3.75a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75z" fill="#0A2540"/></svg>
+                    <div class="fund-title-group">
+                        <h4 class="fund-title">Sales & Marketing</h4>
+                        <p class="fund-amount">$875K</p>
+                    </div>
+                    <div class="fund-percentage">25%</div>
+                </div>
+                <ul class="fund-details">
+                    <li>Digital marketing, trade shows, and direct sales campaigns</li>
+                    <li>Hire VP Sales and 4 enterprise account executives</li>
+                    <li>Content marketing, demand generation, and brand building</li>
+                </ul>
+            </div>
+            <div class="fund-category">
+                <div class="fund-header">
+                    <svg class="fund-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.5 4.25a.75.75 0 0 0-1.5 0V9h-3a.75.75 0 0 0 0 1.5h3v4.75a.75.75 0 0 0 1.5 0V10.5h3a.75.75 0 0 0 0-1.5h-3V4.25zM4.75 16.5a.75.75 0 0 0 0 1.5h14.5a.75.75 0 0 0 0-1.5H4.75z" fill="#0A2540"/></svg>
+                    <div class="fund-title-group">
+                        <h4 class="fund-title">Operations & Growth</h4>
+                        <p class="fund-amount">$525K</p>
+                    </div>
+                    <div class="fund-percentage">15%</div>
+                </div>
+                <ul class="fund-details">
+                    <li>Cloud infrastructure scaling and performance optimization</li>
+                    <li>Expand customer success and support teams</li>
+                    <li>Legal, patents, regulatory compliance, and working capital</li>
+                </ul>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

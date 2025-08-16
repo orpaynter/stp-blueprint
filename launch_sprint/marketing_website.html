@@ -1,0 +1,430 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Roofing Software | OrPaynter - 60-Second Roof Inspections</title>
+    <meta name="description" content="Transform your roofing business with AI-powered inspections. 97% accuracy, 60-second analysis, insurance-ready reports. Join 250+ users saving time and money.">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "OrPaynter AI Platform",
+        "description": "AI-powered roofing intelligence platform for damage detection and claims processing",
+        "url": "https://orpaynter.com",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web, iOS, Android",
+        "offers": {
+            "@type": "Offer",
+            "price": "29-999",
+            "priceCurrency": "USD",
+            "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "billingDuration": "P1M"
+            }
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "bestRating": "5",
+            "ratingCount": "250"
+        }
+    }
+    </script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header */
+        header { 
+            background: white; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        nav { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 1rem 0;
+        }
+        .logo { font-size: 1.8rem; font-weight: bold; color: #667eea; }
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { text-decoration: none; color: #333; font-weight: 500; }
+        .cta-btn { 
+            background: #667eea; 
+            color: white; 
+            padding: 0.8rem 1.5rem; 
+            border: none; 
+            border-radius: 6px; 
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .cta-btn:hover { background: #5a6fd8; transform: translateY(-2px); }
+        
+        /* Hero Section */
+        .hero { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+        .hero h1 { 
+            font-size: 3.5rem; 
+            margin-bottom: 1rem; 
+            font-weight: 700;
+        }
+        .hero p { 
+            font-size: 1.3rem; 
+            margin-bottom: 2rem; 
+            opacity: 0.9;
+        }
+        .hero-ctas { margin: 2rem 0; }
+        .hero-ctas .cta-btn { margin: 0 1rem; font-size: 1.1rem; padding: 1rem 2rem; }
+        .secondary-btn { 
+            background: transparent; 
+            border: 2px solid white; 
+            color: white;
+        }
+        .trust-indicators { 
+            display: flex; 
+            justify-content: center; 
+            gap: 3rem; 
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        .trust-item { text-align: center; }
+        .trust-number { font-size: 2rem; font-weight: bold; }
+        .trust-label { opacity: 0.8; }
+        
+        /* Value Props */
+        .value-props { 
+            padding: 80px 0; 
+            background: #f8f9fa;
+        }
+        .value-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        .value-card { 
+            background: white; 
+            padding: 2rem; 
+            border-radius: 12px; 
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        .value-icon { 
+            font-size: 3rem; 
+            margin-bottom: 1rem;
+        }
+        .value-card h3 { 
+            font-size: 1.3rem; 
+            margin-bottom: 1rem; 
+            color: #2c3e50;
+        }
+        
+        /* Demo Section */
+        .demo-section { 
+            padding: 80px 0; 
+            text-align: center;
+        }
+        .demo-video { 
+            max-width: 800px; 
+            margin: 2rem auto; 
+            background: #f0f0f0; 
+            height: 450px; 
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        /* Social Proof */
+        .social-proof { 
+            padding: 80px 0; 
+            background: #f8f9fa;
+        }
+        .testimonials { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .testimonial { 
+            background: white; 
+            padding: 2rem; 
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        .testimonial-quote { 
+            font-style: italic; 
+            margin-bottom: 1rem; 
+            font-size: 1.1rem;
+        }
+        .testimonial-author { 
+            font-weight: bold; 
+            color: #667eea;
+        }
+        
+        /* CTA Section */
+        .final-cta { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        .final-cta h2 { 
+            font-size: 2.5rem; 
+            margin-bottom: 1rem;
+        }
+        .final-cta p { 
+            font-size: 1.2rem; 
+            margin-bottom: 2rem; 
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer { 
+            background: #2c3e50; 
+            color: white; 
+            padding: 60px 0 20px;
+        }
+        .footer-content { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 2rem;
+        }
+        .footer-section h4 { 
+            margin-bottom: 1rem; 
+            color: #667eea;
+        }
+        .footer-section ul { 
+            list-style: none;
+        }
+        .footer-section a { 
+            color: #bdc3c7; 
+            text-decoration: none;
+        }
+        .footer-bottom { 
+            text-align: center; 
+            margin-top: 2rem; 
+            padding-top: 2rem; 
+            border-top: 1px solid #34495e;
+            color: #95a5a6;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .trust-indicators { gap: 1rem; }
+            .value-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">OrPaynter</div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#demo">Demo</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <a href="#trial" class="cta-btn">Start Free Trial</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>AI-Powered Roof Inspections in 60 Seconds</h1>
+            <p>Detect damage, estimate costs, and process insurance claims with 97% AI accuracy</p>
+            
+            <div class="hero-ctas">
+                <a href="#demo" class="cta-btn">Get Free Roof Analysis</a>
+                <a href="#video" class="cta-btn secondary-btn">Watch Demo Video</a>
+            </div>
+            
+            <div class="trust-indicators">
+                <div class="trust-item">
+                    <div class="trust-number">250+</div>
+                    <div class="trust-label">Beta Users</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-number">$2.3M</div>
+                    <div class="trust-label">Damage Detected</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-number">4.8/5</div>
+                    <div class="trust-label">User Rating</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Propositions -->
+    <section class="value-props">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem;">Why OrPaynter?</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: #666;">The only AI platform built specifically for roofing professionals</p>
+            
+            <div class="value-grid">
+                <div class="value-card">
+                    <div class="value-icon">⚡</div>
+                    <h3>60-Second Analysis</h3>
+                    <p>Upload photos, get instant AI-powered damage assessment with detailed reports</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🎯</div>
+                    <h3>97% Accuracy</h3>
+                    <p>Industry-leading precision in damage detection and cost estimation</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">📱</div>
+                    <h3>Smartphone Ready</h3>
+                    <p>No special equipment needed - works with any phone camera</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">📋</div>
+                    <h3>Insurance Approved</h3>
+                    <p>Generate reports accepted by all major insurance companies</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo-section" id="demo">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">See OrPaynter in Action</h2>
+            <p style="font-size: 1.2rem; color: #666; margin-bottom: 2rem;">Watch how AI transforms roof inspection in under 2 minutes</p>
+            
+            <div class="demo-video">
+                [Interactive Demo Video Would Be Here]<br>
+                2-minute product demonstration
+            </div>
+            
+            <a href="#trial" class="cta-btn" style="font-size: 1.2rem; padding: 1rem 2rem;">Try Free Demo</a>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem;">Trusted by Industry Leaders</h2>
+            
+            <div class="testimonials">
+                <div class="testimonial">
+                    <div class="testimonial-quote">"Detected $8,400 in hail damage I couldn't see. Insurance paid immediately!"</div>
+                    <div class="testimonial-author">Sarah M., Homeowner</div>
+                    <div style="color: #666;">Austin, TX</div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-quote">"Increased our inspection capacity by 300%. Game-changing technology."</div>
+                    <div class="testimonial-author">Mike R., Roofing Contractor</div>
+                    <div style="color: #666;">Dallas, TX</div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-quote">"Cut our claims processing time in half while improving accuracy."</div>
+                    <div class="testimonial-author">Jennifer L., Insurance Adjuster</div>
+                    <div style="color: #666;">Houston, TX</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>Ready to Transform Your Roofing Business?</h2>
+            <p>Join 250+ professionals already using AI to save time and increase accuracy</p>
+            <a href="#trial" class="cta-btn" style="font-size: 1.2rem; padding: 1rem 2rem;">Start Free Trial</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#demo">Demo</a></li>
+                        <li><a href="#api">API</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Solutions</h4>
+                    <ul>
+                        <li><a href="#contractors">For Contractors</a></li>
+                        <li><a href="#homeowners">For Homeowners</a></li>
+                        <li><a href="#insurance">For Insurance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                        <li><a href="#security">Security</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 OrPaynter | Oliver's Roofing & Contracting LLC | Dallas, TX</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+        
+        // Track CTA clicks
+        document.querySelectorAll('.cta-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                gtag('event', 'cta_click', {
+                    'event_category': 'engagement',
+                    'event_label': btn.textContent
+                });
+            });
+        });
+    </script>
+</body>
+</html>

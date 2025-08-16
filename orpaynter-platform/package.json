@@ -1,0 +1,22 @@
+{
+  "name": "orpaynter-platform",
+  "version": "1.0.0",
+  "description": "AI-Powered Roofing Platform",
+  "private": true,
+  "workspaces": [
+    "frontend/*",
+    "services/*"
+  ],
+  "scripts": {
+    "dev": "docker-compose up -d",
+    "dev:build": "docker-compose up --build",
+    "stop": "docker-compose down",
+    "test": "npm run test --workspaces",
+    "lint": "npm run lint --workspaces",
+    "build": "npm run build --workspaces"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20"
+  }
+}

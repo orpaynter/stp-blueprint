@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Problem - OrPaynter</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background-color: #0a0f28;
+      background-image:
+        radial-gradient(circle at 100% 0%, rgba(255, 140, 0, 0.15), transparent 40%),
+        radial-gradient(circle at 0% 100%, rgba(0, 100, 255, 0.1), transparent 40%),
+        linear-gradient(135deg, #0a0f28 0%, #111845 100%);
+      color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header {
+      padding: 50px 60px 30px 60px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    .header h1 {
+      font-size: 56px;
+      font-weight: 700;
+      margin: 0;
+      color: #ffffff;
+      letter-spacing: -1px;
+    }
+
+    .header h2 {
+      font-size: 28px;
+      font-weight: 300;
+      margin: 5px 0 0 0;
+      color: #b0c4de;
+    }
+    
+    .highlight-main {
+        color: #ff8c00;
+        font-weight: 600;
+    }
+
+    .content {
+      display: flex;
+      flex-grow: 1;
+      padding: 30px 60px 50px 60px;
+      gap: 40px;
+    }
+
+    .left-panel {
+      flex: 3;
+      display: flex;
+      flex-direction: column;
+      animation: fadeIn 0.7s ease-out 0.2s forwards;
+      opacity: 0;
+    }
+
+    .right-panel {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      animation: fadeIn 0.7s ease-out 0.4s forwards;
+      opacity: 0;
+    }
+
+    .pain-points-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      flex-grow: 1;
+    }
+
+    .pain-points-list li {
+      font-size: 18px;
+      line-height: 1.6;
+      font-weight: 300;
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .pain-points-list li::before {
+      content: '●';
+      color: #ff8c00;
+      font-size: 24px;
+      line-height: 1;
+      margin-right: 15px;
+      margin-top: 4px;
+    }
+    
+    .highlight-stat {
+      font-weight: 600;
+      color: #ffa500;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .card h3 {
+      font-size: 22px;
+      font-weight: 600;
+      margin: 0 0 15px 0;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 2px solid #ff8c00;
+      padding-bottom: 8px;
+      display: inline-block;
+    }
+
+    .impact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .impact-list li {
+      font-size: 20px;
+      font-weight: 300;
+      margin-bottom: 12px;
+    }
+    
+    .impact-list .impact-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: #ffa500;
+      display: block;
+    }
+    
+    .result-box {
+      background: linear-gradient(135deg, #ff8c00, #ff6b00);
+      color: #0a0f28;
+      padding: 25px;
+      border-radius: 12px;
+      text-align: center;
+    }
+    
+    .result-box h3 {
+        color: #ffffff;
+        font-size: 24px;
+        margin: 0 0 10px 0;
+        border: none;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .result-box p {
+      font-size: 18px;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="header">
+      <h1>The Problem</h1>
+      <h2>A <span class="highlight-main">$47B</span> Industry Stuck in the Past</h2>
+    </div>
+    <div class="content">
+      <div class="left-panel">
+        <ul class="pain-points-list">
+          <li><strong>Manual Damage Assessment:</strong> <span class="highlight-stat">80%</span> of inspections rely on visual estimates, leading to <span class="highlight-stat">40% inaccuracy</span> in reports.</li>
+          <li><strong>Fragmented Ecosystem:</strong> Homeowners, contractors, insurers, and suppliers operate in silos with no unified platform for communication.</li>
+          <li><strong>Insurance Friction:</strong> Claims processing takes <span class="highlight-stat">30-90 days</span> due to manual verification and disputes over damage scope.</li>
+          <li><strong>Pricing Opacity:</strong> Homeowners overpay by <span class="highlight-stat">25-40%</span> due to a lack of transparent, data-driven pricing models.</li>
+          <li><strong>Quality Control Issues:</strong> <span class="highlight-stat">60%</span> of roofing projects experience delays or quality problems from poor contractor vetting.</li>
+        </ul>
+      </div>
+      <div class="right-panel">
+        <div class="card" id="market-impact">
+          <h3>Market Impact</h3>
+          <ul class="impact-list">
+            <li><span class="impact-value">$12B</span> in overpaid insurance claims annually</li>
+            <li><span class="impact-value">$8B</span> in project delays and rework costs</li>
+            <li><span class="impact-value">2.3M</span> homeowners affected each year</li>
+          </ul>
+        </div>
+        <div class="result-box">
+          <h3>The Result</h3>
+          <p>Massive inefficiencies, frustrated customers, and lost revenue across the entire roofing value chain.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

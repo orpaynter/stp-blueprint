@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integration Requirements - OrPaynter</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --brand-primary: #0A4E9A; /* Deep Blue */
+      --brand-secondary: #F7941D; /* Vibrant Orange */
+      --text-dark: #1A202C;
+      --text-light: #4A5568;
+      --bg-light: #F7FAFC;
+      --border-color: #E2E8F0;
+      --white: #FFFFFF;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      background-color: #E2E8F0;
+      font-family: 'Roboto', 'Noto Sans SC', sans-serif;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background-color: var(--white);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      animation: fadeIn 0.8s ease-in-out;
+      overflow: hidden;
+      position: relative;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px 50px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .header h1 {
+      font-size: 38px;
+      color: var(--brand-primary);
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      background-color: var(--brand-primary);
+      border-radius: 6px;
+      margin-right: 12px;
+      position: relative;
+      transform: rotate(45deg);
+    }
+    .logo-mark::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background-color: var(--brand-secondary);
+      border-radius: 4px;
+      top: 10px;
+      left: 10px;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      padding: 25px 50px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .priority-column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .priority-header {
+      border-left: 4px solid var(--brand-primary);
+      padding-left: 15px;
+      margin-bottom: 5px;
+    }
+    .priority-column:nth-child(2) .priority-header { border-color: #5a8fd8; }
+    .priority-column:nth-child(3) .priority-header { border-color: #a3c2e6; }
+
+    .priority-header h2 {
+      margin: 0;
+      font-size: 20px;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+    .component-card {
+      background-color: var(--bg-light);
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      padding: 18px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .component-card h3 {
+      margin: 0 0 12px 0;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--brand-primary);
+    }
+
+    .component-card ul {
+      margin: 0;
+      padding-left: 20px;
+      list-style-type: none;
+    }
+
+    .component-card li {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 8px;
+      position: relative;
+    }
+
+    .component-card li::before {
+      content: '•';
+      position: absolute;
+      left: -15px;
+      color: var(--brand-secondary);
+      font-weight: 700;
+    }
+
+    .footer {
+      background-color: var(--bg-light);
+      border-top: 1px solid var(--border-color);
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .infra-reqs {
+      flex-basis: 65%;
+    }
+
+    .infra-reqs h4 {
+      margin: 0 0 10px 0;
+      font-size: 16px;
+      color: var(--text-dark);
+      font-weight: 700;
+    }
+
+    .infra-reqs ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 20px;
+    }
+
+    .infra-reqs li {
+      font-size: 14px;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+    }
+    
+    .infra-reqs li::before {
+      content: '✓';
+      color: var(--brand-primary);
+      margin-right: 8px;
+      font-weight: bold;
+    }
+
+    .timeline {
+      flex-basis: 30%;
+      text-align: right;
+    }
+
+    .timeline-label {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .timeline-bar {
+      height: 25px;
+      background: linear-gradient(90deg, #a3c2e6 0%, var(--brand-primary) 100%);
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--white);
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="header">
+      <h1>Integration Requirements</h1>
+      <div class="logo">
+        <div class="logo-mark"></div>
+        <span>OrPaynter</span>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="priority-column">
+        <div class="priority-header">
+          <h2>Priority 1: Platform Unification</h2>
+        </div>
+        <div class="component-card">
+          <h3>Marketing Website ↔ Dashboard</h3>
+          <ul>
+            <li>Single sign-on (SSO) implementation</li>
+            <li>Unified user registration flow</li>
+            <li>Seamless navigation between components</li>
+            <li>Consistent branding and UX</li>
+          </ul>
+        </div>
+        <div class="component-card">
+          <h3>Service Orchestration</h3>
+          <ul>
+            <li>API Gateway routing optimization</li>
+            <li>Inter-service communication protocols</li>
+            <li>Event-driven architecture implementation</li>
+            <li>Data consistency across services</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="priority-column">
+        <div class="priority-header">
+          <h2>Priority 2: Service Completion</h2>
+        </div>
+        <div class="component-card">
+          <h3>Project Service Enhancement</h3>
+          <ul>
+            <li>Complete project lifecycle workflows</li>
+            <li>Real-time status tracking</li>
+            <li>Document management integration</li>
+            <li>Timeline and milestone tracking</li>
+          </ul>
+        </div>
+        <div class="component-card">
+          <h3>Payment Processing</h3>
+          <ul>
+            <li>Stripe/payment gateway integration</li>
+            <li>Multi-party transaction handling</li>
+            <li>Escrow and dispute resolution</li>
+            <li>Automated billing and invoicing</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="priority-column">
+        <div class="priority-header">
+          <h2>Priority 3: Marketplace Operations</h2>
+        </div>
+        <div class="component-card">
+          <h3>Contractor Onboarding System</h3>
+          <ul>
+            <li>Verification & certification workflows</li>
+            <li>Rating and review mechanisms</li>
+            <li>Performance analytics dashboard</li>
+          </ul>
+        </div>
+        <div class="component-card">
+          <h3>Supplier Integration</h3>
+          <ul>
+            <li>Inventory management API connections</li>
+            <li>Real-time pricing and availability</li>
+            <li>Order processing automation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+        <div class="infra-reqs">
+            <h4>Infrastructure Requirements</h4>
+            <ul>
+                <li>Kubernetes deployment for production</li>
+                <li>CI/CD pipeline with automated testing</li>
+                <li>Monitoring stack (logs, metrics, alerts)</li>
+                <li>Security hardening & compliance checks</li>
+            </ul>
+        </div>
+        <div class="timeline">
+            <div class="timeline-label">Estimated Timeline</div>
+            <div class="timeline-bar">8-12 Weeks</div>
+        </div>
+    </div>
+  </div>
+</body>
+</html>

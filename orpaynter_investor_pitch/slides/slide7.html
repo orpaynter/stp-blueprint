@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Model Presentation</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f2f5;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background: linear-gradient(135deg, #0A192F 0%, #112240 100%);
+      color: #E6F1FF;
+      display: flex;
+      flex-direction: column;
+      padding: 40px 60px;
+      box-sizing: border-box;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide-header {
+      text-align: center;
+      margin-bottom: 25px;
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+
+    .slide-header h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin: 0;
+      color: #FFFFFF;
+      letter-spacing: 1px;
+    }
+
+    .slide-header h2 {
+      font-size: 22px;
+      font-weight: 300;
+      margin: 5px 0 0 0;
+      color: #64FFDA;
+      letter-spacing: 0.5px;
+    }
+
+    .content-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        height: 100%;
+    }
+
+    .tiers-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      animation: fadeIn 1s ease-out 0.2s forwards;
+      opacity: 0;
+    }
+
+    .tier-card {
+      background-color: #112240;
+      border: 1px solid #233554;
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .tier-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    
+    .tier-card.professional {
+        border-color: #64FFDA;
+        transform: scale(1.05);
+        box-shadow: 0 8px 40px rgba(100, 255, 218, 0.2);
+    }
+
+    .tier-card h3 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #64FFDA;
+      margin: 0 0 10px 0;
+      text-align: center;
+    }
+
+    .tier-card .price {
+      font-size: 36px;
+      font-weight: 700;
+      color: #FFFFFF;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .tier-card .price span {
+      font-size: 16px;
+      font-weight: 300;
+      color: #8892B0;
+    }
+
+    .tier-card ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0 0 15px 0;
+      font-size: 14px;
+      color: #CCD6F6;
+      flex-grow: 1;
+    }
+
+    .tier-card ul li {
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .tier-card .target {
+      font-size: 13px;
+      font-style: italic;
+      color: #8892B0;
+      text-align: center;
+      border-top: 1px solid #233554;
+      padding-top: 15px;
+      margin-top: auto;
+    }
+    
+    .tier-card .target strong {
+      color: #CCD6F6;
+    }
+
+    .lower-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      flex-grow: 1;
+      animation: fadeIn 1s ease-out 0.4s forwards;
+      opacity: 0;
+    }
+    
+    .lower-card {
+        background-color: rgba(17, 34, 64, 0.7);
+        border-radius: 8px;
+        padding: 20px;
+        border: 1px solid #233554;
+    }
+
+    .lower-card h4 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #FFFFFF;
+      margin: 0 0 15px 0;
+      border-bottom: 2px solid #64FFDA;
+      padding-bottom: 10px;
+    }
+
+    .lower-card ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      color: #CCD6F6;
+      font-size: 15px;
+    }
+    
+    .lower-card ul li {
+      margin-bottom: 12px;
+      line-height: 1.6;
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .unit-economics li strong {
+        color: #64FFDA;
+        font-weight: 600;
+        min-width: 220px;
+        display: inline-block;
+    }
+
+    .advantages li svg {
+        width: 18px;
+        height: 18px;
+        margin-right: 10px;
+        fill: #64FFDA;
+        flex-shrink: 0;
+        margin-top: 4px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <header class="slide-header">
+      <h1>Business Model</h1>
+      <h2>Multiple Revenue Streams, Predictable Growth</h2>
+    </header>
+
+    <div class="content-grid">
+      <div class="tiers-container">
+        <div class="tier-card starter">
+          <h3>Starter</h3>
+          <div class="price">$99<span>/month</span></div>
+          <ul>
+            <li>Basic damage assessment & project management</li>
+            <li>Standard contractor marketplace access</li>
+            <li>Email support and basic analytics</li>
+          </ul>
+          <div class="target"><strong>Target:</strong> Individual contractors, small property managers</div>
+        </div>
+        
+        <div class="tier-card professional">
+          <h3>Professional</h3>
+          <div class="price">$299<span>/month</span></div>
+          <ul>
+            <li>Advanced AI features & priority processing</li>
+            <li>Enhanced contractor matching & project tools</li>
+            <li>Insurance integration & claims management</li>
+          </ul>
+          <div class="target"><strong>Target:</strong> Mid-size contractors, property management companies</div>
+        </div>
+
+        <div class="tier-card enterprise">
+          <h3>Enterprise</h3>
+          <div class="price">$999<span>/month</span></div>
+          <ul>
+            <li>Full platform access & custom AI training</li>
+            <li>White-label solutions & dedicated support</li>
+            <li>API access & advanced integrations</li>
+          </ul>
+          <div class="target"><strong>Target:</strong> Large contractors, insurance companies, suppliers</div>
+        </div>
+      </div>
+
+      <div class="lower-section">
+        <div class="lower-card additional-revenue">
+          <h4>Additional Revenue & Unit Economics</h4>
+          <ul class="unit-economics">
+            <li><strong>Transaction Fees:</strong> 2.5% on completed projects</li>
+            <li><strong>Marketplace Commissions:</strong> 5% from supplier sales</li>
+            <li><strong>Insurance Services:</strong> $50 per claim + success fees</li>
+            <li><strong>API Licensing:</strong> $0.10 per API call</li>
+            <li><strong>Avg. Revenue Per User:</strong> $3,600 annually</li>
+            <li><strong>Customer Acquisition Cost:</strong> $150 (8-month payback)</li>
+            <li><strong>Gross Margin:</strong> 87% (typical SaaS margins)</li>
+            <li><strong>Monthly Churn:</strong> <5% (strong product-market fit)</li>
+          </ul>
+        </div>
+        
+        <div class="lower-card advantages">
+          <h4>Revenue Model Advantages</h4>
+          <ul>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"></path></svg>
+              <strong>Recurring subscription revenue</strong> provides predictable cash flow.
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"></path></svg>
+              <strong>Multiple revenue streams</strong> reduce risk and increase lifetime value.
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"></path></svg>
+              <strong>Network effects</strong> where platform value increases with user growth.
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"></path></svg>
+              <strong>High switching costs</strong> once integrated into critical business workflows.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

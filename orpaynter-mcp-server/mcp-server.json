@@ -1,0 +1,39 @@
+{
+  "name": "agent_generated_orpaynter_lead_generation",
+  "exhibit_name": "OrPaynter Lead Generation System", 
+  "type": 3,
+  "command": "sh /workspace/orpaynter-mcp-server/run.sh",
+  "args": [], 
+  "env": {},
+  "description": "Autonomous roofing lead generation and qualification system that handles complete roofing lead workflows including intelligent conversation-based qualification, contractor matching, appointment scheduling, and performance analytics. Designed for maximizing appointment setup rates through smart lead scoring and automated contractor notifications.",
+  "description_for_agent": "Comprehensive MCP server for roofing industry lead generation with tools for lead qualification, contractor matching, appointment scheduling, document processing, notifications, and analytics tracking. Handles complete lead lifecycle from initial contact to appointment setup.",
+  "user_params": {
+    "args": {},
+    "env": {
+      "ORPAYNTER_DB_PATH": {
+        "required": false,
+        "description": "Path to SQLite database file for storing lead data (default: /tmp/orpaynter.db)"
+      },
+      "ORPAYNTER_UPLOADS_DIR": {
+        "required": false,
+        "description": "Directory path for storing uploaded documents and photos (default: /tmp/orpaynter_uploads)"
+      },
+      "SENDGRID_API_KEY": {
+        "required": false,
+        "description": "SendGrid API key for email notifications (optional - disables email features if not provided)"
+      },
+      "TWILIO_ACCOUNT_SID": {
+        "required": false,
+        "description": "Twilio Account SID for SMS notifications (optional - disables SMS features if not provided)"
+      },
+      "TWILIO_AUTH_TOKEN": {
+        "required": false,
+        "description": "Twilio Auth Token for SMS notifications (optional - disables SMS features if not provided)"
+      },
+      "TWILIO_PHONE_NUMBER": {
+        "required": false,
+        "description": "Twilio phone number for sending SMS notifications (optional - disables SMS features if not provided)"
+      }
+    }
+  }
+}

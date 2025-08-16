@@ -1,0 +1,326 @@
+version: '3.8'
+services:
+  api_gateway:
+    image: orpaynter/api-gateway:latest
+    networks:
+    - orpaynter_network
+    restart: unless-stopped
+    ports:
+    - 8080:8080
+    environment:
+      JWT_SECRET: ${JWT_SECRET}
+      CORS_ORIGINS: ${CORS_ORIGINS}
+      RATE_LIMIT: '1000'
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: 4000m
+          memory: 8Gi
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+    healthcheck:
+      test:
+      - CMD
+      - curl
+      - -f
+      - http://localhost:8080/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+  ai_service:
+    image: orpaynter/ai-service:latest
+    networks:
+    - orpaynter_network
+    restart: unless-stopped
+    ports:
+    - 8003:8003
+    environment:
+      MODEL_PATH: /app/models
+      CUDA_VISIBLE_DEVICES: 0,1
+      BATCH_SIZE: '32'
+    volumes:
+    - ai_models:/app/models
+    - ai_cache:/app/cache
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: 4000m
+          memory: 8Gi
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+  user_service:
+    image: orpaynter/user-service:latest
+    networks:
+    - orpaynter_network
+    restart: unless-stopped
+    ports:
+    - 8001:8001
+    environment:
+      DATABASE_URL: ${POSTGRES_URL}
+      REDIS_URL: ${REDIS_URL}
+      EMAIL_SERVICE: ${SENDGRID_API_KEY}
+    depends_on:
+    - postgres
+    - redis
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: 4000m
+          memory: 8Gi
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+  project_service:
+    image: orpaynter/project-service:latest
+    networks:
+    - orpaynter_network
+    restart: unless-stopped
+    ports:
+    - 8002:8002
+    environment:
+      DATABASE_URL: ${POSTGRES_URL}
+      S3_BUCKET: ${S3_BUCKET}
+      AWS_REGION: ${AWS_REGION}
+    volumes:
+    - project_uploads:/app/uploads
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: 4000m
+          memory: 8Gi
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+  notification_service:
+    image: orpaynter/notification-service:latest
+    networks:
+    - orpaynter_network
+    restart: unless-stopped
+    ports:
+    - 8004:8004
+    environment:
+      EMAIL_PROVIDER: sendgrid
+      SMS_PROVIDER: twilio
+      PUSH_PROVIDER: firebase
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: 4000m
+          memory: 8Gi
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+  web_app:
+    image: orpaynter/web-app:latest
+    networks:
+    - orpaynter_network
+    restart: unless-stopped
+    ports:
+    - 3000:3000
+    environment:
+      REACT_APP_API_URL: ${API_GATEWAY_URL}
+      REACT_APP_STRIPE_KEY: ${STRIPE_PUBLISHABLE_KEY}
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: 4000m
+          memory: 8Gi
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+  mobile_api:
+    image: orpaynter/mobile-api:latest
+    networks:
+    - orpaynter_network
+    restart: unless-stopped
+    ports:
+    - 8005:8005
+    environment:
+      CORS_MOBILE: 'true'
+      PUSH_NOTIFICATIONS: enabled
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: 4000m
+          memory: 8Gi
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+  postgres:
+    image: postgres:15-alpine
+    networks:
+    - orpaynter_network
+    restart: unless-stopped
+    ports:
+    - 5432:5432
+    environment:
+      POSTGRES_DB: orpaynter
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+    - postgres_data:/var/lib/postgresql/data
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: 4000m
+          memory: 8Gi
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+  redis:
+    image: redis:7-alpine
+    networks:
+    - orpaynter_network
+    restart: unless-stopped
+    ports:
+    - 6379:6379
+    volumes:
+    - redis_data:/data
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: 4000m
+          memory: 8Gi
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+  mongodb:
+    image: mongo:6
+    networks:
+    - orpaynter_network
+    restart: unless-stopped
+    ports:
+    - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    volumes:
+    - mongo_data:/data/db
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: 4000m
+          memory: 8Gi
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+  qdrant:
+    image: qdrant/qdrant:latest
+    networks:
+    - orpaynter_network
+    restart: unless-stopped
+    ports:
+    - 6333:6333
+    environment:
+      QDRANT__SERVICE__HTTP_PORT: '6333'
+    volumes:
+    - qdrant_storage:/qdrant/storage
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: 4000m
+          memory: 8Gi
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+  prometheus:
+    image: prom/prometheus:latest
+    networks:
+    - orpaynter_network
+    restart: unless-stopped
+    ports:
+    - 9090:9090
+    volumes:
+    - prometheus_data:/prometheus
+  grafana:
+    image: grafana/grafana:latest
+    networks:
+    - orpaynter_network
+    restart: unless-stopped
+    ports:
+    - 3001:3000
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD}
+    volumes:
+    - grafana_data:/var/lib/grafana
+  alertmanager:
+    image: prom/alertmanager:latest
+    networks:
+    - orpaynter_network
+    restart: unless-stopped
+    ports:
+    - 9093:9093
+    volumes:
+    - alertmanager_data:/alertmanager
+  elasticsearch:
+    image: elastic/elasticsearch:8.11.0
+    networks:
+    - orpaynter_network
+    restart: unless-stopped
+    ports:
+    - 9200:9200
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: 'false'
+    volumes:
+    - elasticsearch_data:/usr/share/elasticsearch/data
+  kibana:
+    image: elastic/kibana:8.11.0
+    networks:
+    - orpaynter_network
+    restart: unless-stopped
+    ports:
+    - 5601:5601
+    environment:
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+    depends_on:
+    - elasticsearch
+  logstash:
+    image: elastic/logstash:8.11.0
+    networks:
+    - orpaynter_network
+    restart: unless-stopped
+    volumes:
+    - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    depends_on:
+    - elasticsearch
+volumes:
+  postgres_data: null
+  redis_data: null
+  mongo_data: null
+  qdrant_storage: null
+  ai_models: null
+  ai_cache: null
+  project_uploads: null
+  prometheus_data: null
+  grafana_data: null
+  alertmanager_data: null
+  elasticsearch_data: null
+networks:
+  orpaynter_network:
+    driver: bridge

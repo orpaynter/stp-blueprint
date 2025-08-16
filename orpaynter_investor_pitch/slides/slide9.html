@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Go-to-Market Strategy - OrPaynter</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    :root {
+      --bg-dark: #0a111a;
+      --bg-medium: #1a2639;
+      --bg-light: #2a3a57;
+      --text-primary: #f0f4f8;
+      --text-secondary: #a0b1c9;
+      --accent-gold: #d4af37;
+      --accent-blue: #4a90e2;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #111;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background: linear-gradient(135deg, var(--bg-dark) 0%, #0d1b2a 100%);
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    
+    .slide::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image:
+            radial-gradient(circle at 15% 15%, rgba(74, 144, 226, 0.1) 0%, transparent 30%),
+            radial-gradient(circle at 85% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 30%);
+        z-index: 1;
+    }
+
+    .slide-content {
+        padding: 40px 60px;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        box-sizing: border-box;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header {
+      text-align: left;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    .header h1 {
+      font-size: 48px;
+      margin: 0;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: 1px;
+    }
+    
+    .header h1 span {
+        color: var(--accent-gold);
+    }
+
+    .header h2 {
+      font-size: 22px;
+      margin: 5px 0 0;
+      font-weight: 300;
+      color: var(--text-secondary);
+    }
+    
+    .main-grid {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        gap: 25px;
+    }
+
+    .phases-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      flex-grow: 1;
+    }
+
+    .phase-card {
+      background-color: var(--bg-medium);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      animation: slideUp 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    .phase-card:nth-child(1) { animation-delay: 0.2s; }
+    .phase-card:nth-child(2) { animation-delay: 0.4s; }
+    .phase-card:nth-child(3) { animation-delay: 0.6s; }
+    
+    .phase-card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0 0 5px 0;
+      color: var(--accent-blue);
+    }
+
+    .phase-card h4 {
+      font-size: 14px;
+      font-weight: 400;
+      margin: 0 0 15px 0;
+      color: var(--text-secondary);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 10px;
+    }
+
+    .phase-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 14px;
+      color: var(--text-secondary);
+      flex-grow: 1;
+    }
+
+    .phase-card li {
+      margin-bottom: 10px;
+      line-height: 1.5;
+      padding-left: 20px;
+      position: relative;
+    }
+    
+    .phase-card li::before {
+        content: '•';
+        position: absolute;
+        left: 0;
+        color: var(--accent-blue);
+        font-weight: 700;
+    }
+    
+    .phase-card .goal {
+        margin-top: auto;
+        padding-top: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text-primary);
+        text-align: center;
+    }
+    
+    .phase-card .goal span {
+        color: var(--accent-gold);
+        font-weight: 700;
+    }
+
+    .details-container {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 25px;
+    }
+
+    .detail-card {
+      background-color: var(--bg-medium);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      animation: slideUp 0.8s ease-out forwards;
+      opacity: 0;
+    }
+    
+    .details-container .detail-card:nth-child(1) { animation-delay: 0.8s; }
+    .details-container .detail-card:nth-child(2) { animation-delay: 1.0s; }
+
+
+    .detail-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0 0 15px 0;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-primary);
+    }
+    
+    .detail-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .detail-card li {
+        font-size: 14px;
+        color: var(--text-secondary);
+        margin-bottom: 8px;
+        line-height: 1.5;
+        padding-left: 15px;
+        position: relative;
+    }
+    
+    .detail-card li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 8px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: var(--accent-blue);
+    }
+    
+    .acquisition-channel {
+        margin-bottom: 12px;
+    }
+
+    .acquisition-channel strong {
+        display: block;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 5px;
+    }
+    
+    .acquisition-channel p {
+        font-size: 13px;
+        margin: 0;
+        color: var(--text-secondary);
+    }
+    
+    .metric-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .metric-item:last-child {
+        border-bottom: none;
+    }
+    
+    .metric-item .label {
+        font-size: 14px;
+        color: var(--text-secondary);
+    }
+    
+    .metric-item .value {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--accent-gold);
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      right: 60px;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      opacity: 0.5;
+      z-index: 3;
+    }
+    
+    .footer span {
+        font-weight: 300;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="slide-content">
+      <div class="header">
+        <h1>Go-to-Market <span>Strategy</span></h1>
+        <h2>Multi-Channel Approach to Rapid Scale</h2>
+      </div>
+
+      <div class="main-grid">
+        <div class="phases-container">
+          <div class="phase-card">
+            <h3>Phase 1: Market Entry</h3>
+            <h4>Months 1-6</h4>
+            <ul>
+              <li><strong>Geographic Focus:</strong> Texas, Florida, California</li>
+              <li><strong>Target Customers:</strong> Mid-size contractors (10-50 employees)</li>
+              <li><strong>Channel Strategy:</strong> Direct sales, trade shows, digital marketing</li>
+            </ul>
+            <div class="goal">Goal: <span>500 Customers, $200K MRR</span></div>
+          </div>
+          <div class="phase-card">
+            <h3>Phase 2: Scale & Expand</h3>
+            <h4>Months 7-18</h4>
+            <ul>
+              <li><strong>Market Expansion:</strong> Southeast & Southwest US (12 states)</li>
+              <li><strong>Enterprise Sales:</strong> Insurance companies, large contractor chains</li>
+              <li><strong>Partnership Channel:</strong> CRM & PM tool integrations</li>
+            </ul>
+            <div class="goal">Goal: <span>2,000 Customers, $800K MRR</span></div>
+          </div>
+          <div class="phase-card">
+            <h3>Phase 3: Market Leadership</h3>
+            <h4>Months 19-36</h4>
+            <ul>
+              <li><strong>National Coverage:</strong> All 50 US states</li>
+              <li><strong>International Expansion:</strong> Canada, UK market entry</li>
+              <li><strong>Platform Ecosystem:</strong> 3rd-party developer APIs, app marketplace</li>
+            </ul>
+            <div class="goal">Goal: <span>5,000+ Customers, $2.5M+ MRR</span></div>
+          </div>
+        </div>
+
+        <div class="details-container">
+          <div class="detail-card">
+            <h3>Customer Acquisition Channels</h3>
+            <div class="acquisition-channel">
+              <strong>Digital Marketing (40% of leads)</strong>
+              <p>SEO, Google Ads, LinkedIn, Content Marketing, Webinars</p>
+            </div>
+            <div class="acquisition-channel">
+              <strong>Direct Sales (35% of leads)</strong>
+              <p>Inside Sales (SMB), Enterprise Sales, Customer Success</p>
+            </div>
+            <div class="acquisition-channel">
+              <strong>Partnerships (25% of leads)</strong>
+              <p>Insurance Referrals, Integration Partners, Industry Associations</p>
+            </div>
+          </div>
+          <div class="detail-card">
+            <h3>Key Sales Metrics</h3>
+            <div class="metric-item">
+              <span class="label">Customer Acquisition Cost</span>
+              <span class="value">$150</span>
+            </div>
+            <div class="metric-item">
+              <span class="label">Sales Cycle</span>
+              <span class="value">30-90 Days</span>
+            </div>
+            <div class="metric-item">
+              <span class="label">Demo to Customer Conversion</span>
+              <span class="value">15%</span>
+            </div>
+            <div class="metric-item">
+              <span class="label">Net Revenue Retention</span>
+              <span class="value">125%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>Or</span>Paynter</div>
+  </div>
+
+</body>
+</html>

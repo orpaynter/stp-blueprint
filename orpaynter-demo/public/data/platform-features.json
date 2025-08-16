@@ -1,0 +1,153 @@
+{
+  "features": [
+    {
+      "id": "ai-damage-detection",
+      "title": "AI-Powered Damage Detection",
+      "description": "Advanced computer vision models analyze roof images to identify damage with 95% accuracy",
+      "icon": "camera",
+      "benefits": [
+        "Instant damage assessment",
+        "95% accuracy rate",
+        "Reduced inspection time by 80%",
+        "Comprehensive damage reports"
+      ]
+    },
+    {
+      "id": "cost-estimation",
+      "title": "Intelligent Cost Estimation",
+      "description": "Machine learning algorithms provide accurate project estimates based on real-time market data",
+      "icon": "calculator",
+      "benefits": [
+        "Real-time pricing updates",
+        "Material cost optimization",
+        "Labor cost predictions",
+        "Regional pricing variations"
+      ]
+    },
+    {
+      "id": "marketplace",
+      "title": "Multi-Role Marketplace",
+      "description": "Connect homeowners, contractors, suppliers, and insurance companies in one platform",
+      "icon": "users",
+      "benefits": [
+        "Verified contractor network",
+        "Supplier marketplace",
+        "Insurance integration",
+        "Quality ratings system"
+      ]
+    },
+    {
+      "id": "project-management",
+      "title": "Complete Project Management",
+      "description": "End-to-end workflow management from initial inspection to project completion",
+      "icon": "clipboard",
+      "benefits": [
+        "Milestone tracking",
+        "Document management",
+        "Communication hub",
+        "Progress monitoring"
+      ]
+    },
+    {
+      "id": "insurance-claims",
+      "title": "Insurance Claims Processing",
+      "description": "Streamlined claims processing with automated documentation and verification",
+      "icon": "shield",
+      "benefits": [
+        "Automated claim generation",
+        "Photo documentation",
+        "Fast claim approval",
+        "Fraud detection"
+      ]
+    },
+    {
+      "id": "analytics",
+      "title": "Advanced Analytics",
+      "description": "Comprehensive insights and reporting for all stakeholders",
+      "icon": "chart",
+      "benefits": [
+        "Performance metrics",
+        "ROI tracking",
+        "Predictive analytics",
+        "Custom dashboards"
+      ]
+    }
+  ],
+  "techStack": [
+    {
+      "category": "Frontend",
+      "technologies": ["React.js", "TypeScript", "Next.js", "Tailwind CSS"]
+    },
+    {
+      "category": "Backend",
+      "technologies": ["Node.js", "FastAPI", "Python", "Express.js"]
+    },
+    {
+      "category": "Databases",
+      "technologies": ["PostgreSQL", "MongoDB", "Qdrant", "Redis"]
+    },
+    {
+      "category": "AI/ML",
+      "technologies": ["TensorFlow", "PyTorch", "OpenCV", "Scikit-learn"]
+    },
+    {
+      "category": "Infrastructure",
+      "technologies": ["Docker", "AWS", "Terraform", "GitHub Actions"]
+    },
+    {
+      "category": "Integration",
+      "technologies": ["Stripe", "Twilio", "SendGrid", "AWS S3"]
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": "Basic",
+      "price": "Free",
+      "description": "Perfect for homeowners getting started",
+      "features": [
+        "Basic damage detection",
+        "Up to 3 project estimates",
+        "Contractor search",
+        "Basic support"
+      ]
+    },
+    {
+      "name": "Premium",
+      "price": "$9.99/month",
+      "description": "Enhanced features for active homeowners",
+      "features": [
+        "Advanced AI analysis",
+        "Unlimited project estimates",
+        "Priority contractor matching",
+        "Insurance claim assistance",
+        "24/7 support"
+      ]
+    },
+    {
+      "name": "Professional",
+      "price": "$49.99/month",
+      "description": "Complete solution for contractors",
+      "features": [
+        "Lead generation",
+        "Project management tools",
+        "Advanced analytics",
+        "White-label options",
+        "API access",
+        "Dedicated support"
+      ]
+    },
+    {
+      "name": "Enterprise",
+      "price": "Custom",
+      "description": "Tailored solutions for large organizations",
+      "features": [
+        "Custom integrations",
+        "Multi-location support",
+        "Advanced security",
+        "Custom reporting",
+        "Dedicated account manager",
+        "SLA guarantees"
+      ]
+    }
+  ]
+}

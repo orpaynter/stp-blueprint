@@ -1,0 +1,78 @@
+{
+  "products": [
+    {
+      "id": "monthly_subscription",
+      "type": "subscription",
+      "title": "OrPaynter Pro Monthly",
+      "description": "Monthly subscription to OrPaynter Pro with unlimited assessments",
+      "price": 29.99,
+      "priceLocale": "en_US",
+      "subscriptionPeriod": "P1M"
+    },
+    {
+      "id": "annual_subscription",
+      "type": "subscription",
+      "title": "OrPaynter Pro Annual",
+      "description": "Annual subscription to OrPaynter Pro with unlimited assessments (save 20%)",
+      "price": 287.99,
+      "priceLocale": "en_US",
+      "subscriptionPeriod": "P1Y"
+    },
+    {
+      "id": "contractor_monthly",
+      "type": "subscription",
+      "title": "OrPaynter Contractor Monthly",
+      "description": "Monthly subscription for contractors with team management",
+      "price": 99.99,
+      "priceLocale": "en_US",
+      "subscriptionPeriod": "P1M"
+    },
+    {
+      "id": "contractor_annual",
+      "type": "subscription",
+      "title": "OrPaynter Contractor Annual",
+      "description": "Annual subscription for contractors with team management (save 20%)",
+      "price": 959.99,
+      "priceLocale": "en_US",
+      "subscriptionPeriod": "P1Y"
+    },
+    {
+      "id": "enterprise_subscription",
+      "type": "subscription",
+      "title": "OrPaynter Enterprise",
+      "description": "Enterprise subscription with custom features and priority support",
+      "price": 499.99,
+      "priceLocale": "en_US",
+      "subscriptionPeriod": "P1M"
+    }
+  ],
+  "subscriptionGroups": [
+    {
+      "id": "orpaynter_subscriptions",
+      "name": "OrPaynter Subscriptions",
+      "subscriptions": [
+        "monthly_subscription",
+        "annual_subscription"
+      ]
+    },
+    {
+      "id": "contractor_subscriptions",
+      "name": "Contractor Subscriptions",
+      "subscriptions": [
+        "contractor_monthly",
+        "contractor_annual"
+      ]
+    },
+    {
+      "id": "enterprise_subscriptions",
+      "name": "Enterprise Subscriptions",
+      "subscriptions": [
+        "enterprise_subscription"
+      ]
+    }
+  ],
+  "locales": [
+    "en_US"
+  ],
+  "appAppleId": "1234567890"
+}

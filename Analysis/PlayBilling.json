@@ -1,0 +1,114 @@
+{
+  "subscriptions": [
+    {
+      "productId": "monthly_subscription",
+      "type": "subs",
+      "title": "OrPaynter Pro Monthly",
+      "name": "Monthly Subscription",
+      "description": "Monthly subscription to OrPaynter Pro with unlimited assessments",
+      "skuDetailsToken": "AEuhp4LFQ9i_VvTWJHmQNIlVlQwQMQA_qUbnmQ6K8_zH",
+      "freeTrialPeriod": "P7D",
+      "billingPeriod": "P1M",
+      "price": "$29.99",
+      "priceAmountMicros": 29990000,
+      "priceCurrencyCode": "USD",
+      "introductoryPrice": "$19.99",
+      "introductoryPriceAmountMicros": 19990000,
+      "introductoryPriceCycles": 3,
+      "introductoryPricePeriod": "P1M"
+    },
+    {
+      "productId": "annual_subscription",
+      "type": "subs",
+      "title": "OrPaynter Pro Annual",
+      "name": "Annual Subscription",
+      "description": "Annual subscription to OrPaynter Pro with unlimited assessments (save 20%)",
+      "skuDetailsToken": "AEuhp4LFQ9i_VvTWJHmQNIlVlQwQMQA_qUbnmQ6K8_zH",
+      "freeTrialPeriod": "P7D",
+      "billingPeriod": "P1Y",
+      "price": "$287.99",
+      "priceAmountMicros": 287990000,
+      "priceCurrencyCode": "USD",
+      "introductoryPrice": "$239.99",
+      "introductoryPriceAmountMicros": 239990000,
+      "introductoryPriceCycles": 1,
+      "introductoryPricePeriod": "P1Y"
+    },
+    {
+      "productId": "contractor_monthly",
+      "type": "subs",
+      "title": "OrPaynter Contractor Monthly",
+      "name": "Contractor Monthly",
+      "description": "Monthly subscription for contractors with team management",
+      "skuDetailsToken": "AEuhp4LFQ9i_VvTWJHmQNIlVlQwQMQA_qUbnmQ6K8_zH",
+      "freeTrialPeriod": "P7D",
+      "billingPeriod": "P1M",
+      "price": "$99.99",
+      "priceAmountMicros": 99990000,
+      "priceCurrencyCode": "USD",
+      "introductoryPrice": "$79.99",
+      "introductoryPriceAmountMicros": 79990000,
+      "introductoryPriceCycles": 3,
+      "introductoryPricePeriod": "P1M"
+    },
+    {
+      "productId": "contractor_annual",
+      "type": "subs",
+      "title": "OrPaynter Contractor Annual",
+      "name": "Contractor Annual",
+      "description": "Annual subscription for contractors with team management (save 20%)",
+      "skuDetailsToken": "AEuhp4LFQ9i_VvTWJHmQNIlVlQwQMQA_qUbnmQ6K8_zH",
+      "freeTrialPeriod": "P7D",
+      "billingPeriod": "P1Y",
+      "price": "$959.99",
+      "priceAmountMicros": 959990000,
+      "priceCurrencyCode": "USD",
+      "introductoryPrice": "$799.99",
+      "introductoryPriceAmountMicros": 799990000,
+      "introductoryPriceCycles": 1,
+      "introductoryPricePeriod": "P1Y"
+    },
+    {
+      "productId": "enterprise_subscription",
+      "type": "subs",
+      "title": "OrPaynter Enterprise",
+      "name": "Enterprise Subscription",
+      "description": "Enterprise subscription with custom features and priority support",
+      "skuDetailsToken": "AEuhp4LFQ9i_VvTWJHmQNIlVlQwQMQA_qUbnmQ6K8_zH",
+      "freeTrialPeriod": "P14D",
+      "billingPeriod": "P1M",
+      "price": "$499.99",
+      "priceAmountMicros": 499990000,
+      "priceCurrencyCode": "USD",
+      "introductoryPrice": "$399.99",
+      "introductoryPriceAmountMicros": 399990000,
+      "introductoryPriceCycles": 3,
+      "introductoryPricePeriod": "P1M"
+    }
+  ],
+  "subscriptionGroups": [
+    {
+      "id": "orpaynter_subscriptions",
+      "name": "OrPaynter Subscriptions",
+      "subscriptions": [
+        "monthly_subscription",
+        "annual_subscription"
+      ]
+    },
+    {
+      "id": "contractor_subscriptions",
+      "name": "Contractor Subscriptions",
+      "subscriptions": [
+        "contractor_monthly",
+        "contractor_annual"
+      ]
+    },
+    {
+      "id": "enterprise_subscriptions",
+      "name": "Enterprise Subscriptions",
+      "subscriptions": [
+        "enterprise_subscription"
+      ]
+    }
+  ]
+}

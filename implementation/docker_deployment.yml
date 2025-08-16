@@ -1,0 +1,657 @@
+# OrPaynter AI Platform - Production Docker Deployment
+# Complete microservices architecture with monitoring and security
+
+version: '3.8'
+
+networks:
+  orpaynter_network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  postgres_data:
+    driver: local
+  mongo_data:
+    driver: local
+  redis_data:
+    driver: local
+  qdrant_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+  elasticsearch_data:
+    driver: local
+
+services:
+  # ====================
+  # DATABASES
+  # ====================
+  
+  postgresql:
+    image: postgres:15-alpine
+    container_name: orpaynter_postgres
+    environment:
+      POSTGRES_DB: orpaynter
+      POSTGRES_USER: ${POSTGRES_USER:-orpaynter}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-secure_password_123}
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-scripts/postgres:/docker-entrypoint-initdb.d
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-orpaynter} -d orpaynter"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '0.5'
+
+  mongodb:
+    image: mongo:7.0
+    container_name: orpaynter_mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER:-orpaynter}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:-secure_password_123}
+      MONGO_INITDB_DATABASE: orpaynter
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+      - ./init-scripts/mongo:/docker-entrypoint-initdb.d
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '0.5'
+
+  redis:
+    image: redis:7-alpine
+    container_name: orpaynter_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    command: redis-server --requirepass ${REDIS_PASSWORD:-secure_password_123} --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.25'
+
+  qdrant:
+    image: qdrant/qdrant:v1.7.4
+    container_name: orpaynter_qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    environment:
+      QDRANT__SERVICE__HTTP_PORT: 6333
+      QDRANT__SERVICE__GRPC_PORT: 6334
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6333/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '1'
+
+  # ====================
+  # MICROSERVICES
+  # ====================
+
+  api-gateway:
+    build:
+      context: ./services/api-gateway
+      dockerfile: Dockerfile
+    container_name: orpaynter_api_gateway
+    ports:
+      - "8000:8000"
+    environment:
+      - ENV=production
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-orpaynter}:${POSTGRES_PASSWORD:-secure_password_123}@postgresql:5432/orpaynter
+      - REDIS_URL=redis://:${REDIS_PASSWORD:-secure_password_123}@redis:6379
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-your-production-jwt-secret-key-here}
+      - CORS_ORIGINS=${CORS_ORIGINS:-https://orpaynter.com,https://app.orpaynter.com}
+      - RATE_LIMIT_REQUESTS=${RATE_LIMIT_REQUESTS:-1000}
+      - RATE_LIMIT_WINDOW=${RATE_LIMIT_WINDOW:-3600}
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+      replicas: 2
+
+  user-service:
+    build:
+      context: ./services/user-service
+      dockerfile: Dockerfile
+    container_name: orpaynter_user_service
+    ports:
+      - "8001:8001"
+    environment:
+      - ENV=production
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-orpaynter}:${POSTGRES_PASSWORD:-secure_password_123}@postgresql:5432/orpaynter
+      - REDIS_URL=redis://:${REDIS_PASSWORD:-secure_password_123}@redis:6379
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-your-production-jwt-secret-key-here}
+      - SENDGRID_API_KEY=${SENDGRID_API_KEY}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY:-your-encryption-key-here}
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+
+  project-service:
+    build:
+      context: ./services/project-service
+      dockerfile: Dockerfile
+    container_name: orpaynter_project_service
+    ports:
+      - "8002:8002"
+    environment:
+      - ENV=production
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-orpaynter}:${POSTGRES_PASSWORD:-secure_password_123}@postgresql:5432/orpaynter
+      - MONGO_URL=mongodb://${MONGO_ROOT_USER:-orpaynter}:${MONGO_ROOT_PASSWORD:-secure_password_123}@mongodb:27017/orpaynter?authSource=admin
+      - S3_BUCKET_NAME=${S3_BUCKET_NAME:-orpaynter-files}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '0.75'
+
+  ai-service:
+    build:
+      context: ./services/ai-service
+      dockerfile: Dockerfile
+    container_name: orpaynter_ai_service
+    ports:
+      - "8003:8003"
+    environment:
+      - ENV=production
+      - QDRANT_URL=http://qdrant:6333
+      - MONGO_URL=mongodb://${MONGO_ROOT_USER:-orpaynter}:${MONGO_ROOT_PASSWORD:-secure_password_123}@mongodb:27017/orpaynter?authSource=admin
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENWEATHERMAP_API_KEY=${OPENWEATHERMAP_API_KEY}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-your-production-jwt-secret-key-here}
+      - MODEL_CACHE_DIR=/app/models
+      - TENSORFLOW_SERVING_URL=${TENSORFLOW_SERVING_URL}
+    volumes:
+      - ./models:/app/models:ro
+    depends_on:
+      qdrant:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: '2'
+        reservations:
+          memory: 2G
+          cpus: '1'
+
+  payment-service:
+    build:
+      context: ./services/payment-service
+      dockerfile: Dockerfile
+    container_name: orpaynter_payment_service
+    ports:
+      - "8004:8004"
+    environment:
+      - ENV=production
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-orpaynter}:${POSTGRES_PASSWORD:-secure_password_123}@postgresql:5432/orpaynter
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-your-production-jwt-secret-key-here}
+    depends_on:
+      postgresql:
+        condition: service_healthy
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8004/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+
+  marketplace-service:
+    build:
+      context: ./services/marketplace-service
+      dockerfile: Dockerfile
+    container_name: orpaynter_marketplace_service
+    ports:
+      - "8005:8005"
+    environment:
+      - ENV=production
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-orpaynter}:${POSTGRES_PASSWORD:-secure_password_123}@postgresql:5432/orpaynter
+      - MONGO_URL=mongodb://${MONGO_ROOT_USER:-orpaynter}:${MONGO_ROOT_PASSWORD:-secure_password_123}@mongodb:27017/orpaynter?authSource=admin
+      - REDIS_URL=redis://:${REDIS_PASSWORD:-secure_password_123}@redis:6379
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-your-production-jwt-secret-key-here}
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8005/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+
+  # ====================
+  # FRONTEND APPLICATION
+  # ====================
+
+  web-app:
+    build:
+      context: ./frontend/web-app
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_API_URL: ${REACT_APP_API_URL:-https://api.orpaynter.com}
+        REACT_APP_STRIPE_PUBLISHABLE_KEY: ${REACT_APP_STRIPE_PUBLISHABLE_KEY}
+        REACT_APP_GOOGLE_MAPS_API_KEY: ${REACT_APP_GOOGLE_MAPS_API_KEY}
+        REACT_APP_ENV: production
+    container_name: orpaynter_web_app
+    ports:
+      - "3000:80"
+    depends_on:
+      - api-gateway
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.25'
+
+  # ====================
+  # REVERSE PROXY & LOAD BALANCER
+  # ====================
+
+  nginx:
+    image: nginx:alpine
+    container_name: orpaynter_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./config/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./ssl:/etc/nginx/ssl:ro
+      - ./logs/nginx:/var/log/nginx
+    depends_on:
+      - web-app
+      - api-gateway
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "nginx", "-t"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.25'
+
+  # ====================
+  # MONITORING & OBSERVABILITY
+  # ====================
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: orpaynter_prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./config/prometheus/rules:/etc/prometheus/rules:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=30d'
+      - '--web.enable-lifecycle'
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '0.5'
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: orpaynter_grafana
+    ports:
+      - "3001:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./config/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./config/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin123}
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
+    depends_on:
+      - prometheus
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.25'
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: orpaynter_elasticsearch
+    environment:
+      - node.name=orpaynter-es
+      - cluster.name=orpaynter-cluster
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.security.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '0.5'
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.11.0
+    container_name: orpaynter_kibana
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.25'
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.11.0
+    container_name: orpaynter_logstash
+    volumes:
+      - ./config/logstash/pipeline:/usr/share/logstash/pipeline:ro
+      - ./config/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+    depends_on:
+      - elasticsearch
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '0.5'
+
+  # ====================
+  # SECURITY & BACKUP
+  # ====================
+
+  vault:
+    image: vault:latest
+    container_name: orpaynter_vault
+    ports:
+      - "8200:8200"
+    volumes:
+      - ./config/vault:/vault/config:ro
+      - ./data/vault:/vault/data
+    environment:
+      - VAULT_ADDR=http://0.0.0.0:8200
+      - VAULT_API_ADDR=http://0.0.0.0:8200
+    cap_add:
+      - IPC_LOCK
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    command: vault server -config=/vault/config/vault.hcl
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.25'
+
+  backup-service:
+    build:
+      context: ./services/backup-service
+      dockerfile: Dockerfile
+    container_name: orpaynter_backup
+    environment:
+      - POSTGRES_HOST=postgresql
+      - POSTGRES_USER=${POSTGRES_USER:-orpaynter}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-secure_password_123}
+      - POSTGRES_DB=orpaynter
+      - MONGO_HOST=mongodb
+      - MONGO_USER=${MONGO_ROOT_USER:-orpaynter}
+      - MONGO_PASSWORD=${MONGO_ROOT_PASSWORD:-secure_password_123}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - S3_BACKUP_BUCKET=${S3_BACKUP_BUCKET:-orpaynter-backups}
+      - BACKUP_SCHEDULE=${BACKUP_SCHEDULE:-0 2 * * *}
+    volumes:
+      - ./backups:/app/backups
+    depends_on:
+      - postgresql
+      - mongodb
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.1'
+
+  # ====================
+  # CACHE & SESSION STORE
+  # ====================
+
+  memcached:
+    image: memcached:alpine
+    container_name: orpaynter_memcached
+    ports:
+      - "11211:11211"
+    command: memcached -m 256 -I 5m
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.1'
+
+  # ====================
+  # MESSAGE QUEUE
+  # ====================
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: orpaynter_rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER:-orpaynter}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD:-secure_password_123}
+    volumes:
+      - ./data/rabbitmq:/var/lib/rabbitmq
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.25'
+
+  # ====================
+  # HEALTH CHECKS & MONITORING
+  # ====================
+
+  health-checker:
+    build:
+      context: ./services/health-checker
+      dockerfile: Dockerfile
+    container_name: orpaynter_health_checker
+    environment:
+      - CHECK_INTERVAL=30
+      - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL}
+      - PAGERDUTY_API_KEY=${PAGERDUTY_API_KEY}
+    depends_on:
+      - api-gateway
+      - user-service
+      - project-service
+      - ai-service
+      - payment-service
+      - marketplace-service
+    networks:
+      - orpaynter_network
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+          cpus: '0.1'

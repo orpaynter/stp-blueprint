@@ -1,0 +1,338 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrPaynter Series A Pitch Deck</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        .deck-container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 20px;
+        }
+        .slide {
+            background: white;
+            border-radius: 12px;
+            padding: 60px;
+            margin: 40px 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .slide h1 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+            text-align: center;
+        }
+        .slide h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #3498db;
+        }
+        .slide h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        .metric-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .metric-number {
+            font-size: 3rem;
+            font-weight: bold;
+            display: block;
+        }
+        .metric-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .funding-breakdown {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin: 40px 0;
+        }
+        .funding-item {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        .contact-info {
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
+        ul { margin: 20px 0; padding-left: 20px; }
+        li { margin: 10px 0; font-size: 1.1rem; }
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+        .problem-card {
+            background: #fff5f5;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #e74c3c;
+        }
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+        .solution-card {
+            background: #f0fff4;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+        }
+        .navigation {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation">
+        Slide <span id="current-slide">1</span> of 15
+    </div>
+    
+    <div class="deck-container">
+        <!-- Slide 1: Title -->
+        <div class="slide">
+            <h1>OrPaynter</h1>
+            <h2 style="text-align: center; color: #3498db;">AI-Powered Roofing Intelligence Platform</h2>
+            <p style="text-align: center; font-size: 1.5rem; margin: 30px 0;">Transforming the $47B roofing industry with computer vision and automation</p>
+            
+            <div style="text-align: center; margin: 40px 0;">
+                <div style="font-size: 2rem; color: #e74c3c; font-weight: bold;">$3.5M Series A</div>
+                <div style="font-size: 1.2rem; margin: 10px 0;">Oliver Paynter, Founder & CEO</div>
+                <div style="font-size: 1rem; color: #7f8c8d;">June 2025</div>
+            </div>
+            
+            <div class="metrics-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="metric-card">
+                    <span class="metric-number">250+</span>
+                    <span class="metric-label">Beta Users</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-number">$2.3M</span>
+                    <span class="metric-label">Damage Detected</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-number">4.8/5</span>
+                    <span class="metric-label">User Rating</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Problem -->
+        <div class="slide">
+            <h2>The Roofing Industry is Broken</h2>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <h3>🐌 Manual Inspections Take Hours</h3>
+                    <p>Average 4-6 hours per roof inspection</p>
+                    <p><strong>Cost:</strong> $200-400 in labor costs alone</p>
+                </div>
+                <div class="problem-card">
+                    <h3>❌ 30% of Damage Goes Undetected</h3>
+                    <p>Missed damage leads to bigger problems</p>
+                    <p><strong>Cost:</strong> $8,000 average in preventable repairs</p>
+                </div>
+                <div class="problem-card">
+                    <h3>📄 Insurance Claims Take 45+ Days</h3>
+                    <p>Slow processing frustrates everyone</p>
+                    <p><strong>Cost:</strong> $12B in delayed claim settlements annually</p>
+                </div>
+                <div class="problem-card">
+                    <h3>💸 15% Fraud Rate Costs Billions</h3>
+                    <p>Insurance fraud drives up premiums</p>
+                    <p><strong>Cost:</strong> $7B in fraudulent roofing claims per year</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin: 40px 0; padding: 30px; background: #f8f9fa; border-radius: 8px;">
+                <h3>$47B roofing industry, $15B insurance claims segment</h3>
+                <p style="color: #e74c3c; font-weight: bold;">Climate change increasing storm frequency by 40% over 10 years</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Solution -->
+        <div class="slide">
+            <h2>AI-Powered Solution for Every Stakeholder</h2>
+            <div class="metrics-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 40px;">
+                <div class="metric-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <span class="metric-number">97%</span>
+                    <span class="metric-label">AI Accuracy</span>
+                </div>
+                <div class="metric-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <span class="metric-number">60s</span>
+                    <span class="metric-label">Analysis Time</span>
+                </div>
+                <div class="metric-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <span class="metric-number">85%</span>
+                    <span class="metric-label">Cost Reduction</span>
+                </div>
+            </div>
+            
+            <div class="solution-grid">
+                <div class="solution-card">
+                    <h3>🏠 Homeowners</h3>
+                    <p><strong>Problem:</strong> Don't know when/if roof needs repair</p>
+                    <p><strong>Solution:</strong> Instant AI inspections with insurance-ready reports</p>
+                    <p><strong>Benefit:</strong> Peace of mind + faster insurance claims</p>
+                </div>
+                <div class="solution-card">
+                    <h3>🔨 Contractors</h3>
+                    <p><strong>Problem:</strong> Time-intensive manual inspections</p>
+                    <p><strong>Solution:</strong> AI-powered inspections + automated reporting</p>
+                    <p><strong>Benefit:</strong> 10x more inspections per day</p>
+                </div>
+                <div class="solution-card">
+                    <h3>🏢 Insurance</h3>
+                    <p><strong>Problem:</strong> Slow claims processing + fraud detection</p>
+                    <p><strong>Solution:</strong> Automated claims validation + fraud detection</p>
+                    <p><strong>Benefit:</strong> 50% faster processing + fraud prevention</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional slides would continue here... -->
+        
+        <!-- Slide 12: Funding Ask -->
+        <div class="slide">
+            <h2>$3.5M Series A Funding</h2>
+            <div style="text-align: center; margin: 40px 0;">
+                <div style="font-size: 3rem; color: #e74c3c; font-weight: bold;">$3.5M</div>
+                <div style="font-size: 1.5rem; color: #3498db;">$15M Pre-Money Valuation</div>
+            </div>
+            
+            <div class="funding-breakdown">
+                <div class="funding-item">
+                    <h3>🛠️ Engineering Team (51%)</h3>
+                    <p><strong>$1.8M</strong></p>
+                    <p>Hire 8 engineers (AI, full-stack, DevOps)</p>
+                </div>
+                <div class="funding-item">
+                    <h3>📈 Sales & Marketing (29%)</h3>
+                    <p><strong>$1.0M</strong></p>
+                    <p>Customer acquisition and partnerships</p>
+                </div>
+                <div class="funding-item">
+                    <h3>⚙️ Operations (14%)</h3>
+                    <p><strong>$0.5M</strong></p>
+                    <p>Infrastructure, compliance, legal</p>
+                </div>
+                <div class="funding-item">
+                    <h3>💰 Working Capital (6%)</h3>
+                    <p><strong>$0.2M</strong></p>
+                    <p>General operations and contingency</p>
+                </div>
+            </div>
+            
+            <h3>Milestones</h3>
+            <ul>
+                <li><strong>6 months:</strong> 1,000+ paying customers, insurance partnerships</li>
+                <li><strong>12 months:</strong> 10,000+ customers, $2M+ ARR, expand to 5+ states</li>
+                <li><strong>18 months:</strong> Cash flow positive, 25,000+ customers, Series B ready</li>
+            </ul>
+        </div>
+
+        <!-- Slide 15: Call to Action -->
+        <div class="slide">
+            <div class="cta-section">
+                <h1 style="color: white;">Join the Roofing Revolution</h1>
+                
+                <div class="metrics-grid" style="grid-template-columns: repeat(3, 1fr); margin: 40px 0;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold;">$47B</div>
+                        <div>Market Opportunity</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold;">97%</div>
+                        <div>AI Accuracy</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold;">250+</div>
+                        <div>Beta Users</div>
+                    </div>
+                </div>
+                
+                <h3 style="color: white;">Next Steps</h3>
+                <ul style="text-align: left; display: inline-block; color: white;">
+                    <li>Schedule follow-up meeting</li>
+                    <li>Due diligence materials review</li>
+                    <li>Customer reference calls</li>
+                    <li>Technology demonstration</li>
+                </ul>
+                
+                <div class="contact-info">
+                    <div><strong>Oliver Paynter, CEO</strong></div>
+                    <div>oliver@orpaynter.com</div>
+                    <div>469-479-2526</div>
+                    <div>calendly.com/oliver-orpaynter</div>
+                </div>
+                
+                <h3 style="color: white; margin-top: 40px;">Together, let's build the future of intelligent roofing.</h3>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple slide tracking
+        let currentSlide = 1;
+        const totalSlides = 15;
+        
+        window.addEventListener('scroll', () => {
+            const slides = document.querySelectorAll('.slide');
+            const scrollPosition = window.scrollY + window.innerHeight / 2;
+            
+            slides.forEach((slide, index) => {
+                const slideTop = slide.offsetTop;
+                const slideBottom = slideTop + slide.offsetHeight;
+                
+                if (scrollPosition >= slideTop && scrollPosition <= slideBottom) {
+                    currentSlide = index + 1;
+                    document.getElementById('current-slide').textContent = currentSlide;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

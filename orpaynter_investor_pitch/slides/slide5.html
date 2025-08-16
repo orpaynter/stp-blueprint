@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Demo - OrPaynter</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@400;700&display=swap');
+
+    :root {
+      --bg-color: #F8F9FA;
+      --primary-dark: #1A233A;
+      --primary-blue: #0052CC;
+      --accent-green: #36B37E;
+      --text-dark: #172B4D;
+      --text-light: #5E6C84;
+      --border-color: #DFE1E6;
+      --white: #FFFFFF;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      background-color: #333;
+      font-family: 'Lato', 'Noto Sans SC', sans-serif;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background-color: var(--bg-color);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .header {
+      padding: 40px 60px 30px 60px;
+      border-bottom: 1px solid var(--border-color);
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin: 0;
+    }
+
+    .header h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--text-light);
+      margin-top: 8px;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding: 30px 60px;
+      flex-grow: 1;
+    }
+
+    .features-column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      animation: slideInLeft 0.8s ease-out;
+    }
+
+    .feature-card {
+      background-color: var(--white);
+      border-radius: 8px;
+      padding: 18px 24px;
+      border: 1px solid var(--border-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--primary-blue);
+      margin-bottom: 10px;
+    }
+
+    .feature-card ul {
+      list-style-position: inside;
+      padding-left: 5px;
+    }
+
+    .feature-card li {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 6px;
+    }
+    
+    .feature-card li::marker {
+      color: var(--primary-blue);
+    }
+
+    .demo-column {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      animation: slideInRight 0.8s ease-out;
+    }
+
+    .platform-visual {
+      height: 250px;
+      background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+      border-radius: 8px;
+      border: 1px solid #c7d2fe;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .visual-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #b8c5f5;
+    }
+
+    .visual-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .visual-body {
+      flex-grow: 1;
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 10px;
+    }
+
+    .visual-sidebar {
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 6px;
+    }
+
+    .visual-main {
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
+      border-radius: 6px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .visual-main .bar {
+        height: 12px;
+        border-radius: 4px;
+        background-color: #a5b4fc;
+        opacity: 0.8;
+    }
+
+
+    .metrics-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px 20px;
+    }
+
+    .metric-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .metric-icon {
+      font-size: 24px;
+      color: var(--accent-green);
+      font-weight: bold;
+    }
+
+    .metric-text {
+      font-size: 15px;
+      color: var(--text-dark);
+    }
+
+    .metric-text strong {
+      font-weight: 700;
+      color: var(--accent-green);
+    }
+
+    .footer {
+      padding: 15px 60px;
+      background-color: var(--primary-dark);
+      color: #A5ADBA;
+      font-size: 12px;
+      text-align: center;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      animation: fadeInUp 0.8s ease-out;
+    }
+    
+    .footer strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes slideInRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <header class="header">
+      <h1>Product Demo</h1>
+      <h2>Live Platform with Proven AI Capabilities</h2>
+    </header>
+
+    <main class="content-grid">
+      <div class="features-column">
+        <div class="feature-card" style="animation-delay: 0.2s;">
+          <h3>AI Damage Detection Dashboard</h3>
+          <ul>
+            <li>Upload roof photo → 97% accurate damage assessment in &lt;30 seconds</li>
+            <li>Automated damage classification and severity scoring</li>
+            <li>Integration with insurance claim systems</li>
+          </ul>
+        </div>
+        <div class="feature-card" style="animation-delay: 0.3s;">
+          <h3>Smart Cost Estimation Engine</h3>
+          <ul>
+            <li>Real-time pricing based on materials, labor, and market conditions</li>
+            <li>95% accuracy vs manual estimates (industry standard 65%)</li>
+            <li>Instant project timelines and resource requirements</li>
+          </ul>
+        </div>
+        <div class="feature-card" style="animation-delay: 0.4s;">
+          <h3>Contractor Marketplace</h3>
+          <ul>
+            <li>AI-powered matching algorithm based on 50+ data points</li>
+            <li>Real-time availability and verified credentials</li>
+            <li>Automated project bidding and selection</li>
+          </ul>
+        </div>
+        <div class="feature-card" style="animation-delay: 0.5s;">
+          <h3>Insurance Integration Portal</h3>
+          <ul>
+            <li>Direct API connections to major insurance carriers</li>
+            <li>Automated claim validation and processing</li>
+            <li>Fraud detection using AI pattern recognition</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="demo-column">
+        <div class="platform-visual" style="animation-delay: 0.2s;">
+           <div class="visual-header">
+                <div class="visual-dot" style="background-color: #ff5f57;"></div>
+                <div class="visual-dot" style="background-color: #febc2e;"></div>
+                <div class="visual-dot" style="background-color: #28c840;"></div>
+            </div>
+            <div class="visual-body">
+                <div class="visual-sidebar"></div>
+                <div class="visual-main">
+                    <div class="bar" style="width: 80%"></div>
+                    <div class="bar" style="width: 95%"></div>
+                    <div class="bar" style="width: 60%"></div>
+                    <div class="bar" style="width: 75%"></div>
+                    <div class="bar" style="width: 85%"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="metrics-container">
+          <div class="metric-item" style="animation-delay: 0.4s;">
+            <div class="metric-icon">✓</div>
+            <div class="metric-text"><strong>100% Platform Validation</strong> - Frontend & backend fully operational</div>
+          </div>
+          <div class="metric-item" style="animation-delay: 0.5s;">
+            <div class="metric-icon">✓</div>
+            <div class="metric-text"><strong>250+ Active Users</strong> across all stakeholder groups</div>
+          </div>
+          <div class="metric-item" style="animation-delay: 0.6s;">
+            <div class="metric-icon">✓</div>
+            <div class="metric-text"><strong>$2.3M in Damage Detected</strong> via AI in beta</div>
+          </div>
+          <div class="metric-item" style="animation-delay: 0.7s;">
+            <div class="metric-icon">✓</div>
+            <div class="metric-text"><strong>85% Faster Processing</strong> vs traditional methods</div>
+          </div>
+          <div class="metric-item" style="animation-delay: 0.8s;">
+            <div class="metric-icon">✓</div>
+            <div class="metric-text"><strong>4.8/5 User Satisfaction</strong> from beta customers</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <strong>OrPaynter Technology Infrastructure:</strong> Microservices architecture with PostgreSQL, MongoDB, Redis, and Qdrant vector database supporting real-time AI processing.
+    </footer>
+  </div>
+</body>
+</html>
